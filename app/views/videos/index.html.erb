@@ -1,0 +1,18 @@
+<div class="contextual">
+  <%= link_to(l(:new_video_label), new_project_video_path(@project), :class => 'icon icon-add') if User.current.allowed_to?(:add_video, nil, :global => true) %>
+</div>
+
+<h2>Videos</h2>
+
+<%- if @videos.empty? %>
+  <p class="nodata">
+    No videos uploaded yet!
+    <%= link_to "Add one...", new_project_video_path(@project) %>
+  <p>
+<%- else %>
+  <ul class="videos">
+    <%- @videos.each do |video| %>
+      <li><%= video.name %><li>
+    <%- end %>
+  </ul>
+<%- end %>

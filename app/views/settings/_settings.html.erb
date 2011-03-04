@@ -1,0 +1,13 @@
+<p>
+  <%= l(:transloadit_video_directions) %>
+</p>
+
+<p>
+  <label><%= l(:transloadit_api_key_label) %></label>
+  <%= text_field_tag 'settings[transloadit_api_key]', @settings['transloadit_api_key'] %>
+</p>
+
+<p>
+  <label><%= l(:transloadit_workflow_label) %></label>
+  <%= text_field_tag 'settings[transloadit_workflow]', @settings['transloadit_workflow'] %>
+</p>

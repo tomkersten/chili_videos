@@ -1,0 +1,8 @@
+permission_view_video_list: View video list
+permission_view_specific_video: View specific video
+permission_modify_videos: Modify videos
+permission_delete_video: Delete videos
+permission_add_video: Add videos
+transloadit_video_directions: Enter the Transload.it API key and the workflow you would like to use below.
+transloadit_api_key_label: Transload.it API key
+transloadit_workflow_label: Workflow

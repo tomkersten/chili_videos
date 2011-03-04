@@ -1,0 +1,4 @@
+h1. chili_videos
+
+Redmine plugin which integrates with Transload.it to offer a "private YouTube-like" setup
+to your project site.

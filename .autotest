@@ -1,0 +1,14 @@
+require 'autotest/fsevent'
+require 'redgreen/autotest'
+
+Autotest.add_hook :initialize do |autotest|
+  %w{.git .svn .hg .DS_Store ._* vendor tmp log doc}.each do |exception|
+    autotest.add_exception(exception)
+  end
+
+  autotest.add_mapping(%r%^test/(functional|integraton|unit)/.*\.rb$%) {
+    autotest.files_matching %r%^test/functional/.*_test\.rb$%
+    autotest.files_matching %r%^test/unit/.*_test\.rb$%
+    autotest.files_matching %r%^test/integration/.*_test\.rb$%
+  }
+end
