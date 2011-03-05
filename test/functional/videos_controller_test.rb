@@ -10,14 +10,34 @@ class VideosControllerTest < ActionController::TestCase
       User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video]))
 
       @plugin_settings = {'transloadit_workflow' => 'workflow', 'transloadit_api_key' => 'key'}
-      Setting['plugin_chili_videos'] = @plugin_settings
-
       @request.session[:user_id] = @user.id
     end
 
-    should 'set up an @settings instance variable for the view template' do
-      get :new, :project_id => @project.to_param
-      assert_equal @plugin_settings, assigns(:settings)
+    context "when the plugin has been set up" do
+      setup do
+        Setting['plugin_chili_videos'] = @plugin_settings
+      end
+
+      should 'set up an @settings instance variable for the view template' do
+        get :new, :project_id => @project.to_param
+        assert_equal @plugin_settings, assigns(:settings)
+      end
+
+      should "renders the upload form" do
+        get :new, :project_id => @project.to_param
+        assert_template 'new'
+      end
+    end
+
+    context "when the plugin has not been set up" do
+      setup do
+        Setting['plugin_chili_videos'] = nil
+      end
+
+      should "renders the 'plugin not set up' page" do
+        get :new, :project_id => @project.to_param
+        assert_template 'plugin_not_configured'
+      end
     end
   end
 end

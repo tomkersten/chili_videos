@@ -9,6 +9,9 @@ class VideosController < ApplicationController
 
   def new
     @settings = Setting["plugin_chili_videos"]
+    if @settings['transloadit_api_key'].blank? || @settings['transloadit_workflow'].blank?
+      render :template => 'videos/plugin_not_configured'
+    end
   end
 
   def upload_complete
