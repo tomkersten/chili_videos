@@ -8,10 +8,10 @@ class VideosController < ApplicationController
   end
 
   def new
-    settings = Setting["plugin_chili_videos"]
-    @api_key = settings['transloadit_api_key']
-    @workflow = settings['transloadit_workflow']
-    if @api_key.blank? || @workflow.blank?
+    @api_key = VideoService.api_key
+    @workflow = VideoService.workflow
+
+    if !VideoService.configured?
       render :template => 'videos/plugin_not_configured'
     end
   end

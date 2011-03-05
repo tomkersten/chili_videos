@@ -37,8 +37,5 @@ class VideoServiceTest < ActiveSupport::TestCase
         assert !VideoService.configured?
       end
     end
-
-#    context "when 'transloadit_api_key' is not set" do
-#    end
   end
 end
