@@ -1,15 +1,24 @@
 module VideoService
   extend self
 
+  PLUGIN_KEYNAME = 'plugin_chili_videos'
+  API_KEY_KEYNAME = 'transloadit_api_key'
+  WORKFLOW_KEYNAME = 'transloadit_workflow'
+
   def api_key
-    Setting['plugin_chili_videos']['transloadit_api_key']
+    plugin_settings[API_KEY_KEYNAME]
   end
 
   def workflow
-    Setting['plugin_chili_videos']['transloadit_workflow']
+    plugin_settings[WORKFLOW_KEYNAME]
   end
 
   def configured?
     !api_key.blank? && !workflow.blank?
   end
+
+  private
+    def plugin_settings
+      Setting[PLUGIN_KEYNAME]
+    end
 end
