@@ -8,10 +8,10 @@ class VideosController < ApplicationController
   end
 
   def new
-    @api_key = VideoService.api_key
-    @workflow = VideoService.workflow
+    @api_key = ChiliVideoPlugin::Config.api_key
+    @workflow = ChiliVideoPlugin::Config.workflow
 
-    if !VideoService.configured?
+    if !ChiliVideoPlugin.configured?
       render :template => 'videos/plugin_not_configured'
     end
   end
