@@ -18,14 +18,19 @@ class VideosControllerTest < ActionController::TestCase
         Setting['plugin_chili_videos'] = @plugin_settings
       end
 
-      should 'set up an @settings instance variable for the view template' do
-        get :new, :project_id => @project.to_param
-        assert_equal @plugin_settings, assigns(:settings)
-      end
-
       should "renders the upload form" do
         get :new, :project_id => @project.to_param
         assert_template 'new'
+      end
+
+      should 'set up an @api_key instance variable for the view template' do
+        get :new, :project_id => @project.to_param
+        assert_equal 'key', assigns(:api_key)
+      end
+
+      should 'set up an @workflow instance variable for the view template' do
+        get :new, :project_id => @project.to_param
+        assert_equal 'workflow', assigns(:workflow)
       end
     end
 

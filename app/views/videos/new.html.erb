@@ -1,7 +1,7 @@
 <h2>Upload project video...</h2>
 
 <form id="video-upload" action="http://api2.transloadit.com/assemblies" enctype="multipart/form-data" method="POST">
-  <input type="hidden" name="params" value="{&quot;auth&quot;:{&quot;key&quot;:&quot;<%= @settings['transloadit_api_key'] %>&quot;},&quot;template_id&quot;:&quot;<%= @settings['transloadit_workflow'] %>&quot;,&quot;redirect_url&quot;:&quot;<%= upload_complete_project_videos_url(@project) %>&quot;}" />
+  <input type="hidden" name="params" value="{&quot;auth&quot;:{&quot;key&quot;:&quot;<%= @api_key %>&quot;},&quot;template_id&quot;:&quot;<%= @workflow %>&quot;,&quot;redirect_url&quot;:&quot;<%= upload_complete_project_videos_url(@project) %>&quot;}" />
   <input type="file" name="my_file" />
   <input type="hidden" name="project_id" value="<%= @project.to_param %>"/>
   <input type="hidden" name="user_id" value="<%= User.current.id %>"/>
