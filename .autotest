@@ -7,7 +7,3 @@ Autotest.add_hook :initialize do |autotest|
     autotest.add_exception(exception)
   end
 end
-
-Autotest.add_discovery do
-  "rails"
-end
