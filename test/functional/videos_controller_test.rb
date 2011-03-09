@@ -1,21 +1,36 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class VideosControllerTest < ActionController::TestCase
-  fixtures :projects
+  def setup
+    @project = Project.generate!.reload
+    @user = User.generate!
+    User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video]))
 
-  context 'Adding a new video' do
+    # "log in" the user
+    @request.session[:user_id] = @user.id
+  end
+
+  context 'Viewing the videos available to a project' do
     setup do
-      @project = Project.generate!.reload
-      @user = User.generate!(:firstname => 'Test', :lastname => 'one', :login => 'existing', :password => 'existing', :password_confirmation => 'existing')
-      User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video]))
-
-      @plugin_settings = {'transloadit_workflow' => 'workflow', 'transloadit_api_key' => 'key'}
       @request.session[:user_id] = @user.id
     end
 
+    context "when the plugin has not been set up" do
+      setup do
+        ChiliVideoPlugin::Config.update(:api_key => '', :workflow => '')
+      end
+
+      should "renders the 'plugin not set up' page" do
+        get :index, :project_id => @project.to_param
+        assert_template 'plugin_not_configured'
+      end
+    end
+  end
+
+  context 'Adding a new video' do
     context "when the plugin has been set up" do
       setup do
-        Setting['plugin_chili_videos'] = @plugin_settings
+        ChiliVideoPlugin::Config.update(:api_key => 'key', :workflow => 'workflow')
       end
 
       should "renders the upload form" do
@@ -36,7 +51,7 @@ class VideosControllerTest < ActionController::TestCase
 
     context "when the plugin has not been set up" do
       setup do
-        Setting['plugin_chili_videos'] = nil
+        ChiliVideoPlugin::Config.update(:api_key => '', :workflow => '')
       end
 
       should "renders the 'plugin not set up' page" do

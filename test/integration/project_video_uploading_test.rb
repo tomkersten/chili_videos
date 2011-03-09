@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class ProjectVideoUploadingTest < ActionController::IntegrationTest
   def setup
-    @user = User.generate!(:firstname => 'Test', :lastname => 'one', :login => 'existing', :password => 'existing', :password_confirmation => 'existing')
+    @user = User.generate!(:login => 'existing', :password => 'existing', :password_confirmation => 'existing')
     @project = Project.generate!.reload
 
     User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video]))
@@ -47,7 +47,7 @@ class ProjectVideoUploadingTest < ActionController::IntegrationTest
 
       should "display a message telling the user to set up the plugin on the plugin administration page" do
         visit(new_project_video_path(@project))
-        within("p.nodata") do
+        within("p.warning") do
           assert_have_selector('a', :href => '/settings/plugin/chili_videos')
         end
       end

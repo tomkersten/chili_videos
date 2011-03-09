@@ -2,7 +2,9 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class ProjectVideoListTest < ActionController::IntegrationTest
   def setup
-    @user = User.generate!(:firstname => 'Test', :lastname => 'one', :login => 'existing', :password => 'existing', :password_confirmation => 'existing')
+    ChiliVideoPlugin::Config.update(:api_key => 'api-key', :workflow => 'wf')
+
+    @user = User.generate!(:login => 'existing', :password => 'existing', :password_confirmation => 'existing')
     @project = Project.generate!.reload
     User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video]))
     login_as
@@ -14,14 +16,32 @@ class ProjectVideoListTest < ActionController::IntegrationTest
       click_link("Videos")
     end
 
-    # TODO: Is there a way to make the menu use named routes?
     should "take you to the project's list of videos" do
       assert_equal project_videos_path(@project), current_path
     end
 
-    should "display a link to add a new video to the project in the contextual menu" do
-      within("div.contextual") do
-        assert_have_selector("a", :href => new_project_video_path(@project))
+    context "when no videos exist" do
+      setup do
+        Video.destroy_all
+      end
+
+      should "display a link to add a new video to the project in the contextual menu" do
+        within("div.contextual") do
+          assert_have_selector("a", :href => new_project_video_path(@project))
+        end
+      end
+    end
+
+    context "when the ChiliVideo plugin has not been configured" do
+      setup do
+        ChiliVideoPlugin::Config.update(:api_key => '', :workflow => '')
+      end
+
+      should "display a message telling the user to set up the plugin on the plugin administration page" do
+        visit(project_videos_path(@project))
+        within("p.warning") do
+          assert_have_selector('a', :href => '/settings/plugin/chili_videos')
+        end
       end
     end
   end

@@ -4,7 +4,11 @@ class VideosController < ApplicationController
   before_filter :find_project_by_project_id, :authorize
 
   def index
-    @videos = Video.all
+    if ChiliVideoPlugin.configured?
+      @videos = Video.all
+    else
+      render :template => 'videos/plugin_not_configured'
+    end
   end
 
   def new
