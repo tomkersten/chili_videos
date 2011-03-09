@@ -60,4 +60,12 @@ class VideosControllerTest < ActionController::TestCase
       end
     end
   end
+
+  context 'Handling requests from Transload.it' do
+    should 'create a new Assembly' do
+      Assembly.destroy_all
+      get :upload_complete, {:project_id => @project.to_param}.merge(transloadit_payload)
+      assert_equal 1, Assembly.count
+    end
+  end
 end

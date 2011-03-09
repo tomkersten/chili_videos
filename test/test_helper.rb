@@ -44,6 +44,16 @@ module IntegrationTestHelper
 
 end
 
+module TransloaditServiceHelper
+  def transloadit_payload(identifier = :standard)
+    YAML.load(File.open("test/fixtures/#{identifier}_transloadit_response.yaml"))
+  end
+end
+
 class ActionController::IntegrationTest
   include IntegrationTestHelper
+end
+
+class ActionController::TestCase
+  include TransloaditServiceHelper
 end

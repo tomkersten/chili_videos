@@ -1,6 +1,8 @@
 class VideosController < ApplicationController
   unloadable
 
+  #TODO: wrap configuration check in filter
+
   before_filter :find_project_by_project_id, :authorize
 
   def index
@@ -21,6 +23,16 @@ class VideosController < ApplicationController
   end
 
   def upload_complete
-    File.open('/Users/tom/Desktop/transloadit_response.yaml', 'w+') {|f| f.write(params.to_yaml)}
+    #TODO: migrate to project.assemblies association
+    Assembly.create!(assembly_params)
   end
+
+  private
+    def assembly_params
+      { :assembly_id => params[:assembly_id],
+        :assembly_url => params[:assembly_url],
+        :project_id => @project.id,
+        :processed => false
+      }
+    end
 end

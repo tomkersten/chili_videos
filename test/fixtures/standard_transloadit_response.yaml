@@ -1,0 +1,6 @@
+--- !map:Hash
+assembly_url: http://api2.camilla.transloadit.com/assemblies/ad33a1594d38273293jdskdjfnotreal
+project_id: sample
+action: upload_complete
+controller: videos
+assembly_id: ad33a1594d38273293jdskdjfnotreal
