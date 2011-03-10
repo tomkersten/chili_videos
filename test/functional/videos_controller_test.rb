@@ -2,6 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class VideosControllerTest < ActionController::TestCase
   def setup
+    ChiliVideoPlugin::Config.update(:api_key => 'key', :workflow => 'workflow')
     @project = Project.generate!.reload
     @user = User.generate!
     User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video]))
@@ -62,15 +63,18 @@ class VideosControllerTest < ActionController::TestCase
   end
 
   context 'Handling requests from Transload.it' do
-    should 'create a new Assembly' do
+    setup do
       Assembly.destroy_all
+    end
+
+    should 'create a new Assembly' do
       get :upload_complete, {:project_id => @project.to_param}.merge(transloadit_payload)
       assert_equal 1, Assembly.count
     end
 
     should 'assigns the assembly to the logged in user' do
       get :upload_complete, :project_id => @project.to_param
-      assert_equal @user.id, assigns(:assembly).user_id
+      assert_equal @user.id, Assembly.first.user_id
     end
   end
 end

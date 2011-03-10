@@ -3,28 +3,20 @@ class VideosController < ApplicationController
 
   #TODO: wrap configuration check in filter
 
-  before_filter :find_project_by_project_id, :authorize
+  before_filter :verify_plugin_configured, :find_project_by_project_id, :authorize
 
   def index
-    if ChiliVideoPlugin.configured?
-      @videos = Video.all
-    else
-      render :template => 'videos/plugin_not_configured'
-    end
+    @videos = Video.all
   end
 
   def new
-    if ChiliVideoPlugin.configured?
-      @api_key = ChiliVideoPlugin::Config.api_key
-      @workflow = ChiliVideoPlugin::Config.workflow
-    else
-      render :template => 'videos/plugin_not_configured'
-    end
+    @api_key = ChiliVideoPlugin::Config.api_key
+    @workflow = ChiliVideoPlugin::Config.workflow
   end
 
   def upload_complete
     #TODO: migrate to project.assemblies association
-    @assembly = Assembly.create(assembly_params)
+    Assembly.create!(assembly_params)
   end
 
   private
@@ -35,5 +27,9 @@ class VideosController < ApplicationController
         :user_id => User.current.id,
         :processed => false
       }
+    end
+
+    def verify_plugin_configured
+      render(:template => 'videos/plugin_not_configured') unless ChiliVideoPlugin.configured?
     end
 end
