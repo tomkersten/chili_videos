@@ -67,5 +67,10 @@ class VideosControllerTest < ActionController::TestCase
       get :upload_complete, {:project_id => @project.to_param}.merge(transloadit_payload)
       assert_equal 1, Assembly.count
     end
+
+    should 'assigns the assembly to the logged in user' do
+      get :upload_complete, :project_id => @project.to_param
+      assert_equal @user.id, assigns(:assembly).user_id
+    end
   end
 end
