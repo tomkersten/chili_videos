@@ -46,7 +46,7 @@ end
 
 module TransloaditServiceHelper
   def transloadit_payload(identifier = :standard)
-    YAML.load(File.open("test/fixtures/#{identifier}_transloadit_response.yaml"))
+    YAML.load(File.open("test/fixtures/#{identifier}_transloadit_response.yml"))
   end
 end
 
