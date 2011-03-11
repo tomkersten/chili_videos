@@ -5,6 +5,9 @@ Engines::Testing.set_fixture_path
 
 
 require "webrat"
+require "fakeweb"
+
+FakeWeb.allow_net_connect = false
 
 Webrat.configure do |config|
   config.mode = :rails
@@ -45,13 +48,17 @@ module IntegrationTestHelper
 end
 
 module TransloaditServiceHelper
-  def transloadit_payload(identifier = :standard)
+  def workflow_results(identifier = :standard)
     YAML.load(File.open("test/fixtures/#{identifier}_transloadit_response.yml"))
   end
 end
 
 class ActionController::IntegrationTest
   include IntegrationTestHelper
+end
+
+class ActiveSupport::TestCase
+  include TransloaditServiceHelper
 end
 
 class ActionController::TestCase

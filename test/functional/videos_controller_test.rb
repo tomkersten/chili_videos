@@ -68,7 +68,7 @@ class VideosControllerTest < ActionController::TestCase
     end
 
     should 'create a new Assembly' do
-      get :upload_complete, {:project_id => @project.to_param}.merge(transloadit_payload)
+      get :upload_complete, {:project_id => @project.to_param}.merge(workflow_results)
       assert_equal 1, Assembly.count
     end
 
