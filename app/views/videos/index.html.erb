@@ -12,7 +12,7 @@
 <%- else %>
   <ul class="videos">
     <%- @videos.each do |video| %>
-      <li><%= video.name %><li>
+      <li><%= link_to video.url, video.url %><li>
     <%- end %>
   </ul>
 <%- end %>

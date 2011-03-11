@@ -1,4 +1,8 @@
 require 'redmine'
+require 'httparty'
+require 'hashie'
+
+
 
 Redmine::Plugin.register :chili_videos do
   name 'Chili Videos plugin'
