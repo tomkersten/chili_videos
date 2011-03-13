@@ -65,15 +65,16 @@ class VideosControllerTest < ActionController::TestCase
   context 'Handling requests from Transload.it' do
     setup do
       Assembly.destroy_all
+      stub_assembly_url
     end
 
     should 'create a new Assembly' do
-      get :upload_complete, {:project_id => @project.to_param}.merge(workflow_results)
+      get :upload_complete, workflow_results.merge({'project_id' => @project.to_param})
       assert_equal 1, Assembly.count
     end
 
     should 'assigns the assembly to the logged in user' do
-      get :upload_complete, :project_id => @project.to_param
+      get :upload_complete, workflow_results.merge({'project_id' => @project.to_param})
       assert_equal @user.id, Assembly.first.user_id
     end
   end

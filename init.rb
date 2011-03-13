@@ -23,4 +23,6 @@ Redmine::Plugin.register :chili_videos do
   settings :default => {:transloadit_api_key => '', :transloadit_workflow => ''}, :partial => 'settings/settings'
 
   menu :project_menu, :videos, { :controller => 'videos', :action => 'index' }, :caption => 'Videos', :param => :project_id
+
+  ActiveRecord::Base.observers << :assembly_observer
 end

@@ -49,7 +49,17 @@ end
 
 module TransloaditServiceHelper
   def workflow_results(identifier = :standard)
-    YAML.load(File.open("test/fixtures/#{identifier}_transloadit_response.yml"))
+    YAML.load(File.open("test/fixtures/#{identifier}_transloadit_response.json"))
+  end
+
+  def stub_assembly_url(assembly = nil, fixture_base_name = :single_video_processed)
+    response = "test/fixtures/#{fixture_base_name.to_s}_assembly.json"
+    url = assembly.blank? ? assembly_url : assembly.assembly_url
+    FakeWeb.register_uri(:get, url, :response => response)
+  end
+
+  def assembly_url
+    'http://fake.transload.it/assembly_url'
   end
 end
 

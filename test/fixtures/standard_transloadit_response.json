@@ -1,0 +1,6 @@
+--- !map:Hash
+assembly_url: http://fake.transload.it/assembly_url
+project_id: sample
+action: upload_complete
+controller: videos
+assembly_id: assembly_url
