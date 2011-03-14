@@ -13,12 +13,14 @@
   <ul class="videos">
     <%- @videos.each do |video| %>
       <li>
-      <h3><%= link_to video.url, video.url %></h3>
+      <h3><%= video.title %></h3>
       <dl>
+        <dt>URL:</dt>
+        <dd><%= link_to video.url, video.url %></dd>
         <dt>Description:</dt>
         <dd><%= video.description %></dd>
         <dt>Duration:</dt>
-        <dd><%= video.duration%></dd>
+        <dd><%= video.duration %> seconds</dd>
         <dt>Uploaded by:</dt>
         <dd><%= video.user %></dd>
         <%- if video.version %>
