@@ -17,8 +17,9 @@
       <label for="version">Version:</label>
       <select name="version_id" id="version">
         <%- @versions.each do |version| %>
-          <option value=<%= version.id %>><%= version.name %></option>
+          <option value="<%= version.id %>"><%= version.name %></option>
         <%- end %>
+        <option value="">No version</option>
       </select>
     </p>
   <%- end %>
