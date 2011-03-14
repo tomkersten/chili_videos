@@ -9,6 +9,14 @@ class Assembly < ActiveRecord::Base
 
   attr_accessible :project_id, :ssembly_id, :assembly_url, :user_id
 
+  def completed?
+    raw_assembly(:reload)[ASSEMBLY_STATUS_KEY] == ASSEMBLY_COMPLETE_VALUE
+  end
+
+  def custom_fields
+    HashWithIndifferentAccess.new(raw_assembly["fields"])
+  end
+
   def encodings
     raise ChiliVideoPlugin::Error::IncompleteAssembly unless completed?
 
@@ -29,10 +37,6 @@ class Assembly < ActiveRecord::Base
   def raw_assembly(symbol = nil)
     return @raw_assembly if @raw_assembly && symbol != :reload
     @raw_assembly = Retriever.get(assembly_url)
-  end
-
-  def completed?
-    raw_assembly(:reload)[ASSEMBLY_STATUS_KEY] == ASSEMBLY_COMPLETE_VALUE
   end
 
   class << self

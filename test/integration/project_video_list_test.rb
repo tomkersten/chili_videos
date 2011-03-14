@@ -70,7 +70,7 @@ class ProjectVideoListTest < ActionController::IntegrationTest
 
     context "when videos have been associated with the project" do
       setup do
-        Video.create!(:name => "Video 1", :description => "Description...", :url => "http://some-url-here.com/", :project_id => @project.id)
+        Video.create!(:title => "Video 1", :description => "Description...", :url => "http://some-url-here.com/", :project_id => @project.id)
         visit(project_videos_path(@project))
       end
 

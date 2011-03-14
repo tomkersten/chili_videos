@@ -2,8 +2,34 @@
 
 <form id="video-upload" action="http://api2.transloadit.com/assemblies" enctype="multipart/form-data" method="POST">
   <input type="hidden" name="params" value="{&quot;auth&quot;:{&quot;key&quot;:&quot;<%= @api_key %>&quot;},&quot;template_id&quot;:&quot;<%= @workflow %>&quot;,&quot;redirect_url&quot;:&quot;<%= upload_complete_project_videos_url(@project) %>&quot;}" />
-  <input type="file" name="my_file" />
+  <p>
+    <label for="title">Title:</label>
+    <input type="text" name="title" id="title" value=""/>
+  </p>
+
+  <p>
+    <label for="description">Description:</label>
+    <textarea name="description" id="description"></textarea>
+  </p>
+
+  <%- unless @versions.blank? %>
+    <p>
+      <label for="version">Version:</label>
+      <select name="version_id" id="version">
+        <%- @versions.each do |version| %>
+          <option value=<%= version.id %>><%= version.name %></option>
+        <%- end %>
+      </select>
+    </p>
+  <%- end %>
+
+  <p>
+    <label for="file">Select file to upload...</label>
+    <input type="file" name="my_file" id="file" />
+  </p>
+
   <input type="hidden" name="project_id" value="<%= @project.to_param %>"/>
   <input type="hidden" name="user_id" value="<%= User.current.id %>"/>
+
   <input type="submit" value="Upload">
 </form>

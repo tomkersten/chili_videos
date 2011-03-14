@@ -48,6 +48,12 @@ class VideosControllerTest < ActionController::TestCase
         get :new, :project_id => @project.to_param
         assert_equal 'workflow', assigns(:workflow)
       end
+
+      should 'set up a @versions instance variable for the view template' do
+        version = Version.generate!(:project_id => @project.id)
+        get :new, :project_id => @project.to_param
+        assert_equal [version], assigns(:versions)
+      end
     end
 
     context "when the plugin has not been set up" do

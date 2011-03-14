@@ -12,6 +12,7 @@ class VideosController < ApplicationController
   def new
     @api_key = ChiliVideoPlugin::Config.api_key
     @workflow = ChiliVideoPlugin::Config.workflow
+    @versions = @project.versions.open
   end
 
   def upload_complete

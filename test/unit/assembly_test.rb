@@ -40,6 +40,24 @@ class AssemblyTest < ActiveSupport::TestCase
     end
   end
 
+  context ".custom_fields" do
+    setup do
+      @assembly = Assembly.generate!(:project_id => @project.id, :assembly_url => assembly_url)
+      service_response = 'test/fixtures/single_video_processed_assembly.json'
+      FakeWeb.register_uri(:get, assembly_url, :response => service_response)
+    end
+
+    should "return a Hash-like object with key-value pairs of custom fields stored on the assembly" do
+      assert @assembly.custom_fields.has_key?('project_id')
+      assert @assembly.custom_fields.has_key?('user_id')
+    end
+
+    should "return an object which resolves String or Symbol keys" do
+      assert @assembly.custom_fields.has_key?('project_id')
+      assert @assembly.custom_fields.has_key?(:user_id)
+    end
+  end
+
   context "processing" do
     context "when an assembly is successfully created" do
       setup do

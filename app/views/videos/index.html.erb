@@ -12,7 +12,20 @@
 <%- else %>
   <ul class="videos">
     <%- @videos.each do |video| %>
-      <li><%= link_to video.url, video.url %></li>
+      <li>
+      <h3><%= link_to video.url, video.url %></h3>
+      <dl>
+        <dt>Description:</dt>
+        <dd><%= video.description %></dd>
+        <dt>Duration:</dt>
+        <dd><%= video.duration%></dd>
+        <dt>Uploaded by:</dt>
+        <dd><%= video.user_id %></dd>
+        <%- if video.version_id %>
+          <dt>Associated with project version:</dt>
+          <dd><%= video.version_id %></dd>
+        <%- end %>
+      </li>
     <%- end %>
   </ul>
 <%- end %>
