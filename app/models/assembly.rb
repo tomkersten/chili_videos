@@ -9,6 +9,9 @@ class Assembly < ActiveRecord::Base
 
   attr_accessible :project_id, :ssembly_id, :assembly_url, :user_id
 
+  belongs_to :project
+  belongs_to :user
+
   def completed?
     raw_assembly(:reload)[ASSEMBLY_STATUS_KEY] == ASSEMBLY_COMPLETE_VALUE
   end

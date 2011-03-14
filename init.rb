@@ -2,6 +2,19 @@ require 'redmine'
 require 'httparty'
 require 'hashie'
 
+# Patches to the Redmine core.
+require 'dispatcher'
+
+Dispatcher.to_prepare :question_plugin do
+  require_dependency 'project'
+  Project.send(:include, VideoProjectPatch) unless Project.included_modules.include? VideoProjectPatch
+
+  require_dependency 'user'
+  User.send(:include, VideoUserPatch) unless User.included_modules.include? VideoUserPatch
+
+  require_dependency 'version'
+  Version.send(:include, VideoVersionPatch) unless Version.included_modules.include? VideoVersionPatch
+end
 
 
 Redmine::Plugin.register :chili_videos do

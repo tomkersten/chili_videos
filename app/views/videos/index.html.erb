@@ -20,10 +20,10 @@
         <dt>Duration:</dt>
         <dd><%= video.duration%></dd>
         <dt>Uploaded by:</dt>
-        <dd><%= video.user_id %></dd>
-        <%- if video.version_id %>
+        <dd><%= video.user %></dd>
+        <%- if video.version %>
           <dt>Associated with project version:</dt>
-          <dd><%= video.version_id %></dd>
+          <dd><%= video.version %></dd>
         <%- end %>
       </li>
     <%- end %>
