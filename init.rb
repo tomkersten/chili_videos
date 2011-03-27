@@ -39,3 +39,30 @@ Redmine::Plugin.register :chili_videos do
 
   ActiveRecord::Base.observers << :assembly_observer
 end
+
+Redmine::WikiFormatting::Macros.register do
+  desc "Embeds a flv file into flash video player.\n" +
+       "Usage examples:\n\n" +
+       "  !{{video(id)}}\n"
+  macro :video do |o, args|
+    video_id = ars[0]
+    video = Video.find(args[0])
+    if video
+      file_url = video.url
+    else
+      file_url = "im_not_a_video"
+    end
+
+<<END
+<p id='video_#{@num}'>PLAYER</p>
+<script type='text/javascript' src='#{Setting.protocol}://#{Setting.host_name}/plugin_assets/redmine_embedded_video/swfobject.js'></script>
+<script type='text/javascript'>
+var s1 = new SWFObject('#{Setting.protocol}://#{Setting.host_name}/plugin_assets/redmine_embedded_video/player.swf','player','400','300','9');
+s1.addParam('allowfullscreen','true');
+s1.addParam('allowscriptaccess','always');
+s1.addParam('flashvars','file=#{file_url}');
+s1.write('video_#{@num}');
+</script>
+END
+  end
+end
