@@ -1,12 +1,14 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class ProjectVideoListTest < ActionController::IntegrationTest
+  include VideosHelper
+
   def setup
     ChiliVideoPlugin::Config.update(:api_key => 'api-key', :workflow => 'wf')
 
     @user = User.generate!(:login => 'existing', :password => 'existing', :password_confirmation => 'existing')
     @project = Project.generate!.reload
-    User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video]))
+    User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video, :view_specific_video]))
     login_as
   end
 
@@ -70,13 +72,33 @@ class ProjectVideoListTest < ActionController::IntegrationTest
 
     context "when videos have been associated with the project" do
       setup do
-        Video.create!(:title => "Video 1", :description => "Description...", :url => "http://some-url-here.com/", :project_id => @project.id)
+        @video = Video.create!(:title => "Video 1", :description => "Description...", :url => "http://some-url-here.com/", :project_id => @project.id, :user_id => @user.id)
         visit(project_videos_path(@project))
       end
 
       should "show a list of videos" do
         within("ul.videos") do
-          assert_have_selector("li")
+          assert_have_selector("li.video")
+        end
+      end
+
+      context "a video in the list" do
+        should "have an id which matches the video's database id" do
+          within("ul.videos") do
+            assert_have_selector("li.video##{@video.to_param}")
+          end
+        end
+
+        should "include the video title as a link to the 'show' page" do
+          within("ul.videos li.video##{@video.to_param} a[href='#{project_video_path(@project, @video)}']") do
+            assert_match(/#{@video.title}/, response.body)
+          end
+        end
+
+        should "include the code to embed the video in another project page with the standard size" do
+          within("ul.videos li.video##{@video.to_param}") do
+            assert_have_selector("input.embed.standard[value='#{video_embed_macro_markup(@video)}']")
+          end
         end
       end
 

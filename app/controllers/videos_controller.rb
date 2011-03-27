@@ -14,8 +14,16 @@ class VideosController < ApplicationController
   end
 
   def upload_complete
-    #TODO: migrate to project.assemblies association
     @project.assemblies.create!(assembly_params)
+  end
+
+  def show
+    @video = @project.videos.find_by_id(params[:id])
+
+    if @video.blank?
+      flash[:error] = "The requested video does not exist. Please verify the link or send the project owner a message."
+      redirect_to(project_videos_path(@project))
+    end
   end
 
   private

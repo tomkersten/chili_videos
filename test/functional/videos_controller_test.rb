@@ -5,7 +5,7 @@ class VideosControllerTest < ActionController::TestCase
     ChiliVideoPlugin::Config.update(:api_key => 'key', :workflow => 'workflow')
     @project = Project.generate!.reload
     @user = User.generate!
-    User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video]))
+    User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video, :view_specific_video]))
 
     # "log in" the user
     @request.session[:user_id] = @user.id
@@ -82,6 +82,38 @@ class VideosControllerTest < ActionController::TestCase
     should 'assigns the assembly to the logged in user' do
       get :upload_complete, workflow_results.merge({'project_id' => @project.to_param})
       assert_equal @user.id, Assembly.first.user_id
+    end
+  end
+
+  context "Viewing a specific video associated with a Project" do
+    context "when no videos have been associated with the project" do
+      setup do
+        Video.destroy_all
+        get :show, :project_id => @project.to_param, :id => 'nonexistant-video'
+      end
+
+      should "redirect back to the list of project videos" do
+        assert_redirected_to(project_videos_path(:project_id => @project.to_param))
+      end
+
+      should "display an error message to the user" do
+        assert_not_nil flash[:error]
+      end
+    end
+
+    context "when videos have been associated with the project" do
+      setup do
+        @video = Video.create!(:title => "Video 1", :description => "Description...", :url => "http://some-url-here.com/", :project_id => @project.id, :user_id => @user.id)
+        get :show, :project_id => @project.to_param, :id => @video.to_param
+      end
+
+      should "assign the requested video to @video for the view template" do
+        assert_equal @video, assigns(:video)
+      end
+
+      should "assign the project associted with the requested video to @project for the view template" do
+        assert_equal @project, assigns(:project)
+      end
     end
   end
 end

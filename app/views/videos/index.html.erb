@@ -12,21 +12,21 @@
 <%- else %>
   <ul class="videos">
     <%- @videos.each do |video| %>
-      <li>
-      <h3><%= video.title %></h3>
-      <dl>
-        <dt>URL:</dt>
-        <dd><%= link_to video.url, video.url %></dd>
-        <dt>Description:</dt>
-        <dd><%= video.description %></dd>
-        <dt>Duration:</dt>
-        <dd><%= video.duration %> seconds</dd>
-        <dt>Uploaded by:</dt>
-        <dd><%= video.user %></dd>
-        <%- if video.version %>
-          <dt>Associated with project version:</dt>
-          <dd><%= video.version %></dd>
-        <%- end %>
+      <li class="video" id="<%= video.to_param %>">
+        <a href="<%= project_video_path(@project, video) %>" style="width:128px;height:96px;background-color:#000;display:block;">
+          <%= video.duration %>
+        </a>
+        <h3><%= link_to video.title, project_video_path(@project, video) %></h3>
+        <dl>
+          <dt>Uploaded by:</dt>
+          <dd><%= link_to video.user, user_path(video.user) %></dd>
+          <%- if video.version %>
+            <dt>Associated with project version:</dt>
+            <dd><%= link_to video.version, project_version_path(@project, video.version) %></dd>
+          <%- end %>
+          <dt>Embed</dt>
+          <dd><input type="text" class="embed standard" value="<%= video_embed_macro_markup(video) %>" /></dd>
+        </dl>
       </li>
     <%- end %>
   </ul>
