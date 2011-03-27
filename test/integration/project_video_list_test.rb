@@ -94,12 +94,6 @@ class ProjectVideoListTest < ActionController::IntegrationTest
             assert_match(/#{@video.title}/, response.body)
           end
         end
-
-        should "include the code to embed the video in another project page with the standard size" do
-          within("ul.videos li.video##{@video.to_param}") do
-            assert_have_selector("input.embed.standard[value='#{video_embed_macro_markup(@video)}']")
-          end
-        end
       end
 
       should "not display a 'no videos' message" do

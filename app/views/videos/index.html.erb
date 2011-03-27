@@ -1,3 +1,7 @@
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'video', :plugin => 'redmine_chili_videos' %>
+<% end %>
+
 <div class="contextual">
   <%= link_to(l(:new_video_label), new_project_video_path(@project), :class => 'icon icon-add') if User.current.allowed_to?(:add_video, nil, :global => true) %>
 </div>
@@ -13,20 +17,20 @@
   <ul class="videos">
     <%- @videos.each do |video| %>
       <li class="video" id="<%= video.to_param %>">
-        <a href="<%= project_video_path(@project, video) %>" style="width:128px;height:96px;background-color:#000;display:block;">
-          <%= video.duration %>
+        <a href="<%= project_video_path(@project, video) %>" class="video-cell small">
+          <span>
+              <%= video.length %>
+          </span>
         </a>
-        <h3><%= link_to video.title, project_video_path(@project, video) %></h3>
-        <dl>
-          <dt>Uploaded by:</dt>
-          <dd><%= link_to video.user, user_path(video.user) %></dd>
-          <%- if video.version %>
-            <dt>Associated with project version:</dt>
-            <dd><%= link_to video.version, project_version_path(@project, video.version) %></dd>
-          <%- end %>
-          <dt>Embed</dt>
-          <dd><input type="text" class="embed standard" value="<%= video_embed_macro_markup(video) %>" /></dd>
-        </dl>
+      <h3>
+        <%= link_to(truncate(video.title, :length => 24), project_video_path(@project, video), :title => video.title) %>
+      </h3>
+      <dl>
+        <dt>by:</dt>
+        <dd>
+          <%= link_to(truncate(video.user.name, :length => 17), user_path(video.user)) %>
+        </dd>
+      </dl>
       </li>
     <%- end %>
   </ul>

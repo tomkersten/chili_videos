@@ -1,0 +1,52 @@
+ul.videos li {
+  list-style-type: none;
+  float: left;
+  margin-right: 25px;
+}
+
+.video h3 {
+  border-bottom: none;
+  font-size: 12px;
+  width: 128px;
+  padding: 5px 0 0 0;
+  margin: 0;
+}
+
+.video {
+  padding-bottom: 30px;
+}
+
+.video-cell {
+  background-color:#000;
+  text-align: right;
+  display: block;
+}
+
+.video .video-cell.small {
+  width:128px;
+  height:96px;
+}
+
+.video-cell span {
+  position:relative;
+  top: 81px;
+  padding-right: 3px;
+  color: #CCC;
+  display: block;
+}
+
+.video dl {
+  margin-top: 0;
+}
+
+.video dt {
+  float: left;
+  padding-right: 3px;
+}
+
+.video dd {
+  margin: 0px;
+  clear: after;
+  display: block;
+}
+
