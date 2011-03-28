@@ -4,6 +4,7 @@ require 'hashie'
 
 # Patches to the Redmine core.
 require 'dispatcher'
+require 'videos_helper'
 
 Dispatcher.to_prepare :question_plugin do
   require_dependency 'project'
@@ -45,8 +46,10 @@ Redmine::WikiFormatting::Macros.register do
        "Usage examples:\n\n" +
        "  !{{video(id)}}\n"
   macro :video do |o, args|
-    video_id = ars[0]
-    video = Video.find(args[0])
+    video_id = args[0]
+    size = args[1] || :standard
+
+    video = Video.find(video_id)
     if video
       file_url = video.url
     else
@@ -54,15 +57,8 @@ Redmine::WikiFormatting::Macros.register do
     end
 
 <<END
-<p id='video_#{@num}'>PLAYER</p>
-<script type='text/javascript' src='#{Setting.protocol}://#{Setting.host_name}/plugin_assets/redmine_embedded_video/swfobject.js'></script>
-<script type='text/javascript'>
-var s1 = new SWFObject('#{Setting.protocol}://#{Setting.host_name}/plugin_assets/redmine_embedded_video/player.swf','player','400','300','9');
-s1.addParam('allowfullscreen','true');
-s1.addParam('allowscriptaccess','always');
-s1.addParam('flashvars','file=#{file_url}');
-s1.write('video_#{@num}');
-</script>
+<div class="video-cell large" id="video_#{video.to_param}"></div>
+#{VideosHelper.video_embed_code(video, size)}
 END
   end
 end

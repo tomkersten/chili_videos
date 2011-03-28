@@ -1,22 +1,38 @@
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'video', :plugin => 'redmine_chili_videos' %>
+<% end %>
+
 <div class="contextual">
   <%= link_to(l(:new_video_label), new_project_video_path(@project), :class => 'icon icon-add') if User.current.allowed_to?(:add_video, nil, :global => true) %>
 </div>
 
 <h2><%= @video.title %></h2>
 
-<div class="video">
+<div class="single video">
+  <div class="video-cell large" id="<%= dom_id(@video) %>"></div>
+  <%- if gravatar_enabled? %>
+  <%= link_to(gravatar(@video.user.mail), user_path(@video.user), :title => "Uploaded by #{@video.user.name}") %>
+  <%- end %>
   <dl>
     <dt>Description:</dt>
     <dd><%= @video.description %></dd>
-    <dt>Duration:</dt>
-    <dd><%= @video.duration %> seconds</dd>
-    <dt>Uploaded by:</dt>
-    <dd><%= link_to @video.user, user_path(@video.user) %></dd>
+
+    <%- if !gravatar_enabled? %>
+      <dt>Uploaded by:</dt>
+      <dd><%= link_to @video.user, user_path(@video.user) %></dd>
+    <%- end %>
+
+    <dt>Length:</dt>
+    <dd><%= @video.length %></dd>
+
     <%- if @video.version %>
-      <dt>Associated with project version:</dt>
+      <dt>Release:</dt>
       <dd><%= link_to @video.version, project_version_path(@project, @video.version) %></dd>
     <%- end %>
-    <dt>Embed</dt>
-    <dd><input type="text" class="embed standard" value="<%= video_embed_macro_markup(@video) %>" /></dd>
+
+    <dt><label for="<%= @video.title %>">Embed:</label></dt>
+    <dd><input type="text" id="<%= @video.title %>" class="embed standard" value="<%= video_embed_macro_markup(@video) %>" /></dd>
   </dl>
 </div>
+
+<%= video_embed_code(@video, :large) %>

@@ -16,6 +16,24 @@ ul.videos li {
   padding-bottom: 30px;
 }
 
+.video.single .video-cell {
+  float: left;
+  margin-right: 20px;
+}
+
+.video .gravatar {
+  float: right;
+}
+
+.video.single dt {
+  font-weight: bold;
+  display: block;
+}
+
+.video input {
+  width: 200px;
+}
+
 .video-cell {
   background-color:#000;
   text-align: right;
@@ -25,6 +43,11 @@ ul.videos li {
 .video .video-cell.small {
   width:128px;
   height:96px;
+}
+
+.video .video-cell.large {
+  width:640px;
+  height:390px;
 }
 
 .video-cell span {
@@ -45,8 +68,9 @@ ul.videos li {
 }
 
 .video dd {
-  margin: 0px;
+  margin: 3px;
   clear: after;
   display: block;
 }
+
 
