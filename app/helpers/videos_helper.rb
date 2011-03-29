@@ -2,7 +2,7 @@ module VideosHelper
   extend self
 
   def video_embed_macro_markup(video)
-    "{{video #{video.to_param}}}"
+    "{{video(#{video.to_param})}}"
   end
 
   def gravatar_enabled?
