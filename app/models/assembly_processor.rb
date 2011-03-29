@@ -10,7 +10,7 @@ class AssemblyProcessor
                                 :user_id => assembly.user_id,
                                 :url => encoding.url})
       end
-      true
+      assembly.update_attribute(:processed, true)
     end
   end
 end
