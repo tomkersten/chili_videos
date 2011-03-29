@@ -1,9 +1,3 @@
-h1. chili_videos
-
-Redmine plugin which integrates with Transload.it to offer a "private YouTube-like" setup
-to your project site.
-
-
 # Requires additions to main app config/environment.rb
 
   config.gem 'delayed_job', :version => '~>2.0.4'
@@ -12,11 +6,11 @@ to your project site.
 # taken from: https://groups.google.com/forum/#!topic/delayed_job/qOxGFWnfdWM
 Here are the steps:
 
-1) sudo gem sources -a http://gems.github.com
-2) sudo gem install alexvollmer-daemon-spawn
-3) Move the old daemons delayed job script out of the way -> mv script/
+1. sudo gem sources -a http://gems.github.com
+1. sudo gem install alexvollmer-daemon-spawn
+1. Move the old daemons delayed job script out of the way -> mv script/
 delayed_job script/delayed_job.daemons
-4) Make this your new script/delayed_job: http://gist.github.com/104314
+1. Make this your new script/delayed_job: http://gist.github.com/104314
 
 Note: you can have both daemon-spawn and daemons gems installed since
 the script/delayed_job determines which one to use...so you can go
@@ -36,3 +30,6 @@ Hope this helps someone else.  And hope someone can compare daemons,
 
        Reference (How I figured it out):
            http://rwldesign.com/journals/1-solutions/posts/24-working-with-delayed-job
+
+
+
