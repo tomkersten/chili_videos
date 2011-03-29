@@ -1,9 +1,6 @@
 # chili_videos
 
-* [Project site]()
-* [Wiki]()
-* [Repository]()
-* [Website]()
+* http://chiliproject.org
 
 
 ## DESCRIPTION:

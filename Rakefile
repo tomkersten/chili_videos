@@ -13,6 +13,8 @@ end
 
 Dir["/lib/tasks/**/*.rake"].sort.each { |ext| load ext }
 
+task :default => [:test]
+
 begin
   require 'hoe'
   Hoe.plugin :git
@@ -28,7 +30,6 @@ begin
 
   ContributorTasks.new
 
-  task :default => [:test]
 rescue LoadError
   puts "You are missing the 'hoe' gem, which is used for gem packaging & release management. Install using 'gem install hoe' if you need development rake tasks."
 end
