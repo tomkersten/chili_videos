@@ -1,5 +1,5 @@
 <% content_for :header_tags do %>
-  <%= stylesheet_link_tag '/plugin_assets/chili_videos/stylesheets/video' %>
+  <%= stylesheet_link_tag '/plugin_assets/chili_videos/stylesheets/videos' %>
 <% end %>
 
 <div class="contextual">
@@ -14,6 +14,9 @@
   <%= link_to(gravatar(@video.user.mail), user_path(@video.user), :title => "Uploaded by #{@video.user.name}") %>
   <%- end %>
   <dl>
+    <dt>Length:</dt>
+    <dd><%= @video.length %></dd>
+
     <dt>Description:</dt>
     <dd><%= @video.description %></dd>
 
@@ -21,9 +24,6 @@
       <dt>Uploaded by:</dt>
       <dd><%= link_to @video.user, user_path(@video.user) %></dd>
     <%- end %>
-
-    <dt>Length:</dt>
-    <dd><%= @video.length %></dd>
 
     <%- if @video.version %>
       <dt>Release:</dt>

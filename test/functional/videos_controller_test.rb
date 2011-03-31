@@ -12,10 +12,6 @@ class VideosControllerTest < ActionController::TestCase
   end
 
   context 'Viewing the videos available to a project' do
-    setup do
-      @request.session[:user_id] = @user.id
-    end
-
     context "when the plugin has not been set up" do
       setup do
         ChiliVideos::Config.update(:api_key => '', :workflow => '')
@@ -24,6 +20,30 @@ class VideosControllerTest < ActionController::TestCase
       should "renders the 'plugin not set up' page" do
         get :index, :project_id => @project.to_param
         assert_template 'plugin_not_configured'
+      end
+    end
+
+    context "when the plugin has been set up" do
+      context "and there are unprocessed assemblies" do
+        setup do
+          Assembly.generate!(:processed => false, :project_id => @project.id)
+        end
+
+        should "set a notification message for the view template" do
+          get :index, :project_id => @project.to_param
+          assert_not_nil flash[:notice]
+        end
+      end
+
+      context "and all assemblies have been processed" do
+        setup do
+          Assembly.destroy_all
+        end
+
+        should "does not set a notification message for the view template" do
+          get :index, :project_id => @project.to_param
+          assert_nil flash[:notice]
+        end
       end
     end
   end

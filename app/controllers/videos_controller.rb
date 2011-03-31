@@ -5,6 +5,10 @@ class VideosController < ApplicationController
 
   def index
     @videos = @project.videos
+
+    unless @project.assemblies.unprocessed.empty?
+      flash[:notice] = "There are #{Assembly.unprocessed.count} videos being processed right now. Hang tight..."
+    end
   end
 
   def new

@@ -6,6 +6,13 @@ class AssemblyTest < ActiveSupport::TestCase
     stub_assembly_url
   end
 
+  context "creation" do
+    should "set 'processed' attribute to false" do
+      assembly = Assembly.generate!(:processed => true)
+      assert_equal false, assembly.processed
+    end
+  end
+
   context ".encodings" do
     setup do
       @assembly = Assembly.generate!(:project_id => @project.id, :assembly_url => assembly_url)

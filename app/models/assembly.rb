@@ -7,10 +7,15 @@ class Assembly < ActiveRecord::Base
   ASSEMBLY_STATUS_KEY     = "ok"
   ASSEMBLY_COMPLETE_VALUE = "ASSEMBLY_COMPLETED"
 
-  attr_accessible :project_id, :ssembly_id, :assembly_url, :user_id
+  attr_accessible :project_id, :assembly_id, :assembly_url, :user_id
 
   belongs_to :project
   belongs_to :user
+
+  named_scope :processed, :conditions => {:processed => true}
+  named_scope :unprocessed, :conditions => {:processed => false}
+
+  before_create :set_processed_to_false
 
   def completed?
     raw_assembly(:reload)[ASSEMBLY_STATUS_KEY] == ASSEMBLY_COMPLETE_VALUE
@@ -48,4 +53,10 @@ class Assembly < ActiveRecord::Base
       format :json
     end
   end
+
+  private
+    def set_processed_to_false
+      self.processed = false
+      true
+    end
 end
