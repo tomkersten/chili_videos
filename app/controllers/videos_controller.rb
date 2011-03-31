@@ -8,8 +8,8 @@ class VideosController < ApplicationController
   end
 
   def new
-    @api_key = ChiliVideoPlugin::Config.api_key
-    @workflow = ChiliVideoPlugin::Config.workflow
+    @api_key = ChiliVideos::Config.api_key
+    @workflow = ChiliVideos::Config.workflow
     @versions = @project.versions.open
   end
 
@@ -36,6 +36,6 @@ class VideosController < ApplicationController
     end
 
     def verify_plugin_configured
-      render(:template => 'videos/plugin_not_configured') unless ChiliVideoPlugin.configured?
+      render(:template => 'videos/plugin_not_configured') unless ChiliVideos.configured?
     end
 end

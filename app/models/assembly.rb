@@ -21,7 +21,7 @@ class Assembly < ActiveRecord::Base
   end
 
   def encodings
-    raise ChiliVideoPlugin::Error::IncompleteAssembly unless completed?
+    raise ChiliVideos::Error::IncompleteAssembly unless completed?
 
     raw_assembly["results"]["encode"].map do |raw_encoding|
       Encoding.new(raw_encoding)

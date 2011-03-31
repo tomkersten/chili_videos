@@ -4,7 +4,7 @@ class ViewingProjectVideoTest < ActionController::IntegrationTest
   include VideosHelper
 
   def setup
-    ChiliVideoPlugin::Config.update(:api_key => 'api-key', :workflow => 'wf')
+    ChiliVideos::Config.update(:api_key => 'api-key', :workflow => 'wf')
 
     @user = User.generate!(:login => 'existing', :password => 'existing', :password_confirmation => 'existing')
     @project = Project.generate!.reload

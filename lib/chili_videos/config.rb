@@ -1,4 +1,4 @@
-module ChiliVideoPlugin
+module ChiliVideos
   module Config
     extend self
 

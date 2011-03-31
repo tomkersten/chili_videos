@@ -24,7 +24,7 @@ begin
     self.extra_deps       = [['httparty', '0.7.4'], ['delayed_job', '2.0.4']]
     self.readme_file      = 'README.md'
     self.extra_rdoc_files = FileList['README.md', 'LICENSE']
-    self.version          = ChiliVideoPlugin::VERSION
+    self.version          = ChiliVideos::VERSION
     developer('Tom Kersten', 'tom@whitespur.com')
   end
 

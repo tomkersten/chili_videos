@@ -4,10 +4,10 @@
 
 <p>
   <label><%= l(:transloadit_api_key_label) %></label>
-  <%= text_field_tag "settings[#{ChiliVideoPlugin::Config::API_KEY_KEYNAME}]", ChiliVideoPlugin::Config.api_key %>
+  <%= text_field_tag "settings[#{ChiliVideos::Config::API_KEY_KEYNAME}]", ChiliVideos::Config.api_key %>
 </p>
 
 <p>
   <label><%= l(:transloadit_workflow_label) %></label>
-  <%= text_field_tag "settings[#{ChiliVideoPlugin::Config::WORKFLOW_KEYNAME}]", ChiliVideoPlugin::Config.workflow%>
+  <%= text_field_tag "settings[#{ChiliVideos::Config::WORKFLOW_KEYNAME}]", ChiliVideos::Config.workflow%>
 </p>

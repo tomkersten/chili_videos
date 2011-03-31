@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class VideosControllerTest < ActionController::TestCase
   def setup
-    ChiliVideoPlugin::Config.update(:api_key => 'key', :workflow => 'workflow')
+    ChiliVideos::Config.update(:api_key => 'key', :workflow => 'workflow')
     @project = Project.generate!.reload
     @user = User.generate!
     User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video, :view_specific_video]))
@@ -18,7 +18,7 @@ class VideosControllerTest < ActionController::TestCase
 
     context "when the plugin has not been set up" do
       setup do
-        ChiliVideoPlugin::Config.update(:api_key => '', :workflow => '')
+        ChiliVideos::Config.update(:api_key => '', :workflow => '')
       end
 
       should "renders the 'plugin not set up' page" do
@@ -31,7 +31,7 @@ class VideosControllerTest < ActionController::TestCase
   context 'Adding a new video' do
     context "when the plugin has been set up" do
       setup do
-        ChiliVideoPlugin::Config.update(:api_key => 'key', :workflow => 'workflow')
+        ChiliVideos::Config.update(:api_key => 'key', :workflow => 'workflow')
       end
 
       should "renders the upload form" do
@@ -58,7 +58,7 @@ class VideosControllerTest < ActionController::TestCase
 
     context "when the plugin has not been set up" do
       setup do
-        ChiliVideoPlugin::Config.update(:api_key => '', :workflow => '')
+        ChiliVideos::Config.update(:api_key => '', :workflow => '')
       end
 
       should "renders the 'plugin not set up' page" do

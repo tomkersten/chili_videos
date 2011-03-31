@@ -35,7 +35,7 @@ class AssemblyTest < ActiveSupport::TestCase
       end
 
       should "raises an IncompleteAssembly exception" do
-        assert_raise(ChiliVideoPlugin::Error::IncompleteAssembly) {@assembly.encodings}
+        assert_raise(ChiliVideos::Error::IncompleteAssembly) {@assembly.encodings}
       end
     end
   end

@@ -4,7 +4,7 @@ class ProjectVideoListTest < ActionController::IntegrationTest
   include VideosHelper
 
   def setup
-    ChiliVideoPlugin::Config.update(:api_key => 'api-key', :workflow => 'wf')
+    ChiliVideos::Config.update(:api_key => 'api-key', :workflow => 'wf')
 
     @user = User.generate!(:login => 'existing', :password => 'existing', :password_confirmation => 'existing')
     @project = Project.generate!.reload
@@ -36,7 +36,7 @@ class ProjectVideoListTest < ActionController::IntegrationTest
 
     context "when the ChiliVideo plugin has not been configured" do
       setup do
-        ChiliVideoPlugin::Config.update(:api_key => '', :workflow => '')
+        ChiliVideos::Config.update(:api_key => '', :workflow => '')
       end
 
       should "display a message telling the user to set up the plugin on the plugin administration page" do
