@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'redmine_plugin_support'
-require 'chili_video_plugin'
+require 'chili_videos'
 require 'lib/tasks/contributor_tasks'
 
 RedminePluginSupport::Base.setup do |plugin|

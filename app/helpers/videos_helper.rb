@@ -2,7 +2,7 @@ module VideosHelper
   extend self
 
   def video_embed_macro_markup(video)
-    "{{video(#{video.to_param})}}"
+    "{{video(#{video.permalink})}}"
   end
 
   def gravatar_enabled?
@@ -19,7 +19,7 @@ module VideosHelper
     "  s1.addParam('allowfullscreen','true');\n" + \
     "  s1.addParam('allowscriptaccess','always');\n" + \
     "  s1.addParam('flashvars','file=#{video.url}');\n" + \
-    "  s1.write('video_#{video.to_param}');\n" + \
+    "  s1.write('video_#{video.permalink}');\n" + \
     "</script>\n"
   end
 

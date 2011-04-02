@@ -22,7 +22,7 @@ class VideosController < ApplicationController
   end
 
   def show
-    @video = @project.videos.find_by_id(params[:id])
+    @video = @project.videos.find_by_cached_slug(params[:id])
 
     if @video.blank?
       flash[:error] = "The requested video does not exist. Please verify the link or send the project owner a message."

@@ -9,7 +9,7 @@
 <h2><%= @video.title %></h2>
 
 <div class="single video">
-  <div class="video-cell large" id="<%= dom_id(@video) %>"></div>
+  <div class="video-cell large" id="video_<%= @video.permalink %>"></div>
   <%- if gravatar_enabled? %>
   <%= link_to(gravatar(@video.user.mail), user_path(@video.user), :title => "Uploaded by #{@video.user.name}") %>
   <%- end %>

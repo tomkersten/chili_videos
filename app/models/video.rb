@@ -13,4 +13,8 @@ class Video < ActiveRecord::Base
     seconds = duration % 60
     "#{minutes}:#{seconds.to_s.rjust(2,'0')}"
   end
+
+  def permalink
+    friendly_id
+  end
 end
