@@ -25,10 +25,10 @@ module VideosHelper
 
   private
     def swf_object_file_url
-      "#{Setting.protocol}://#{Setting.host_name}/plugin_assets/chili_videos/swfobject.js"
+      "/plugin_assets/chili_videos/swfobject.js"
     end
 
     def swf_player_file_url
-      "#{Setting.protocol}://#{Setting.host_name}/plugin_assets/chili_videos/player.swf"
+      "/plugin_assets/chili_videos/player.swf"
     end
 end
