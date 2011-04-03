@@ -20,10 +20,15 @@ begin
   Hoe.plugin :git
 
   $hoe = Hoe.spec('chili_videos') do
-    self.summary = "ChiliProject plugin which adds self-hosted videos transcoded using the Transload.it service."
-    self.extra_deps       = [['httparty', '0.7.4'], ['delayed_job', '2.0.4']]
+    self.summary = "ChiliProject (/Redmine) plugin which adds self-hosted videos transcoded using the Transload.it service. The plugin a 'Video' tab to a project site which contains any associated videos."
+    self.extra_deps       = [
+                              ['httparty', '0.7.4'],
+                              ['delayed_job', '2.0.4'],
+                              ['friendly_id', '3.2.1.1'],
+                              ['hashie', '1.0.0']
+                            ]
     self.readme_file      = 'README.md'
-    self.extra_rdoc_files = FileList['README.md', 'LICENSE']
+    self.extra_rdoc_files = FileList['README.md', 'LICENSE', 'History.txt']
     self.version          = ChiliVideos::VERSION
     developer('Tom Kersten', 'tom@whitespur.com')
   end
