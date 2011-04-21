@@ -1,6 +1,6 @@
 # ChiliVideos Plugin - A "private Youtube" for ChiliProject (or Redmine) installations
 
-* http://github.com/tomkersten/chili\_videos
+* [http://github.com/tomkersten/chili_videos](http://github.com/tomkersten/chili_videos)
 
 ## DESCRIPTION:
 
