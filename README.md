@@ -159,3 +159,4 @@ Refer to the [LICENSE](https://github.com/tomkersten/chili_videos/blob/master/LI
 
 ## Contributors (sorted alphabetically)
 
+* Roy Kolak
