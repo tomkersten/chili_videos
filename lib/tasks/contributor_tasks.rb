@@ -16,7 +16,7 @@ class ContributorTasks < Rake::TaskLib
 
         print "Updating the 'Contributors' section of README..."
 
-        File.open("README.txt", "w+") do |file|
+        File.open("README.md", "w+") do |file|
           file.puts readme_without_contributors_section
           file.puts "## Contributors (sorted alphabetically)"
           file.puts ""
@@ -36,16 +36,16 @@ class ContributorTasks < Rake::TaskLib
     end
 
     def committers
-      excluded_committers = ["Tom Kersten", "Leah Rieger"]
+      excluded_committers = ["Tom Kersten"]
       @committers ||= all_committers - excluded_committers
     end
 
     def readme_file_contents
-      @readme_contents ||= `cat README.txt`
+      @readme_contents ||= `cat README.md`
     end
 
     def existing_contributors
-      existing_contributors = readme_file_contents[/== Contributors(.|\n)*/].strip.split("\n* ")
+      existing_contributors = readme_file_contents[/## Contributors(.|\n)*/].strip.split("\n* ")
       existing_contributors.shift # remove "Contributors..." line
       existing_contributors
     end
@@ -59,6 +59,6 @@ class ContributorTasks < Rake::TaskLib
     end
 
     def readme_without_contributors_section
-      readme_file_contents.sub(/== Contributors(.|\n)*/, '')
+      readme_file_contents.sub(/## Contributors(.|\n)*/, '')
     end
 end
