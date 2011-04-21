@@ -25,6 +25,7 @@ assets/stylesheets/videos.css
 assets/swfobject.js
 assets/yt.swf
 autotest/discover.rb
+bin/delayed_job
 config/locales/en.yml
 config/routes.rb
 db/migrate/20110301025054_create_videos.rb
@@ -37,6 +38,7 @@ lang/en.yml
 lib/chili_videos.rb
 lib/chili_videos/config.rb
 lib/chili_videos/error.rb
+lib/tasks/chili_videos_tasks.rb
 lib/tasks/contributor_tasks.rb
 lib/tasks/delayed_job.rake
 lib/tasks/friendly_id.rake
