@@ -1,3 +1,10 @@
+require 'httparty'
+require 'hashie'
+require 'friendly_id'
+
+require 'delayed_job'
+Delayed::Worker.backend = :active_record
+
 require 'chili_videos/config'
 
 module ChiliVideos

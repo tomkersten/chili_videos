@@ -1,6 +1,5 @@
 require 'redmine'
-require 'httparty'
-require 'hashie'
+require 'chili_videos'
 
 # Patches to the Redmine core.
 require 'dispatcher'
@@ -22,7 +21,7 @@ Redmine::Plugin.register :chili_videos do
   name 'Chili Videos plugin'
   author 'Tom Kersten'
   description 'Adds support for using the Transload.it service to transcode videos and associate them with projects.'
-  version '0.0.1'
+  version ChiliVideos::VERSION
   url 'http://example.com/path/to/plugin'
   author_url 'http://tomkersten.com/'
 

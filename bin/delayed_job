@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+# -*- ruby -*-
+require 'rubygems'
+require 'daemon_spawn'
+
+class DelayedJobWorker < DaemonSpawn::Base
+  def start(args)
+    ENV['RAILS_ENV'] ||= args.first || 'development'
+    Dir.chdir ENV['RAILS_ROOT']
+    require File.join('config', 'environment')
+
+    Delayed::Worker.new.start
+  end
+
+  def stop
+    system("kill `cat #{ENV['RAILS_ROOT']}/tmp/pids/delayed_job.pid`")
+  end
+end
+
+DelayedJobWorker.spawn!(:log_file => File.join(ENV['RAILS_ROOT'], "log", "delayed_job.log"),
+                        :pid_file => File.join(ENV['RAILS_ROOT'], 'tmp', 'pids', 'delayed_job.pid'),
+                        :sync_log => true,
+                        :working_dir => ENV['RAILS_ROOT'])

@@ -4,8 +4,9 @@ require File.expand_path(File.dirname(__FILE__) + '/../../../../test/test_helper
 Engines::Testing.set_fixture_path
 
 
-require "webrat"
-require "fakeweb"
+require 'webrat'
+require 'fakeweb'
+require 'chili_videos'
 
 FakeWeb.allow_net_connect = false
 
