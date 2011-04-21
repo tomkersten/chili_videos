@@ -6,7 +6,7 @@
   <%= link_to(l(:new_video_label), new_project_video_path(@project), :class => 'icon icon-add') if User.current.allowed_to?(:add_video, nil, :global => true) %>
 </div>
 
-<h2><%= @video.title %></h2>
+<h2><%= @video.title.blank? ? "(none provided)" : @video.title %></h2>
 
 <div class="single video">
   <div class="video-cell large" id="video_<%= @video.permalink %>"></div>
@@ -18,7 +18,7 @@
     <dd><%= @video.length %></dd>
 
     <dt>Description:</dt>
-    <dd><%= @video.description %></dd>
+    <dd><%= @video.description.blank? ? "(none provided)" : @video.description %></dd>
 
     <%- if !gravatar_enabled? %>
       <dt>Uploaded by:</dt>
