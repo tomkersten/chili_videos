@@ -3,7 +3,7 @@
 <% end %>
 
 <div class="contextual">
-  <%= link_to(l(:new_video_label), new_project_video_path(@project), :class => 'icon icon-add') if User.current.allowed_to?(:add_video, nil, :global => true) %>
+  <%= link_to(l(:edit_video_label), edit_project_video_path(@project), :class => 'icon icon-edit video-edit') if User.current.allowed_to?(:edit_video, nil, :global => true) %>
   <%= link_to(l(:delete_video_label), project_video_path(@project), :class => 'icon icon-del video-del', :confirm => l(:confirm_video_deletion), :method => :delete) if User.current.allowed_to?(:delete_video, nil, :global => true) %>
 </div>
 

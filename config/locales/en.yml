@@ -10,5 +10,6 @@ en:
   transloadit_workflow_label: Workflow
   new_video_label: Add video
   delete_video_label: Delete this video
+  edit_video_label: Edit this video
   confirm_video_deletion: Are you sure you want to delete this video?
   video_deleted_message: "Booyah! The requested video has been deleted."

@@ -77,20 +77,20 @@ class ProjectVideoListTest < ActionController::IntegrationTest
       end
 
       should "show a list of videos" do
-        within("ul.videos") do
-          assert_have_selector("li.video")
+        within(".videos") do
+          assert_have_selector(".video")
         end
       end
 
       context "a video in the list" do
         should "have an id which matches the video's database id" do
           within("ul.videos") do
-            assert_have_selector("li.video##{@video.to_param}")
+            assert_have_selector(".video##{@video.to_param}")
           end
         end
 
         should "include the video title as a link to the 'show' page" do
-          within("ul.videos li.video##{@video.to_param} a[href='#{project_video_path(@project, @video)}']") do
+          within(".videos .video##{@video.to_param} a[href='#{project_video_path(@project, @video)}']") do
             assert_match(/#{@video.title}/, response.body)
           end
         end

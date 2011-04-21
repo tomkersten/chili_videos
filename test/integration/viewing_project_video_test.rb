@@ -41,6 +41,12 @@ class ViewingProjectVideoTest < ActionController::IntegrationTest
           assert_have_selector("a[class~='video-del'][href='#{project_video_path(@project, @video)}']")
         end
       end
+
+      should "have a link to edit the video" do
+        within("div.contextual") do
+          assert_have_selector("a[class~='video-edit'][href='#{edit_project_video_path(@project, @video)}']")
+        end
+      end
     end
   end
 
@@ -51,7 +57,12 @@ class ViewingProjectVideoTest < ActionController::IntegrationTest
     end
 
     should "notify the user that the video was deleted" do
-      assert_have_selector("div.notice")
+      assert_have_selector(".notice")
+    end
+
+    should "removes the video from the project's list of videos" do
+      visit project_videos_path(@project)
+      assert_have_no_selector(".video##{@video.to_param}")
     end
   end
 end
