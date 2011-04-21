@@ -1,11 +1,11 @@
 # ChiliVideos Plugin - A "private Youtube" for ChiliProject (or Redmine) installations
 
-* http://chiliproject.org
+* http://github.com/tomkersten/chili\_videos
 
 ## DESCRIPTION:
 
-ChiliProject/Redmine plugin which integrates with Transload.it to offer
-a private "YouTube-like" setup to your project site.
+ChiliProject/Redmine plugin which integrates with [Transload.it](http://transload.it)
+to offer a private "YouTube-like" setup to your project site.
 
 Noteable items to consider before installing:
 
@@ -19,10 +19,10 @@ Noteable items to consider before installing:
 
 ## FEATURES:
 
-1. Makes it dead simple to upload and store videos to your own
+1. Makes it dead simple upload, store, and embed videos to your own
    ChiliProject/Redmine (CP/RM) installation.
-   1. Note: Videos are hosted wherever you have Transload.it send them,
-       S3 being a popular option.
+   - **Note:** Videos are stored wherever you have Transload.it send them,
+       Amazon's S3 service being a popular option.
 1. Allows you to link videos to specific "versions" in the CP/RM
    project
 1. Adds a "video" wiki macro which can be used to embed any video in
@@ -31,7 +31,9 @@ Noteable items to consider before installing:
 
 ## PROBLEMS:
 
-1. Does not support authenticated requests
+1. Does not support authenticated requests to Transload.it yet. You
+   probably don't want to use this on "public" CP/RM installations
+   quite yet. This will be implementd soon...
 1. If users click the "submit" button multiple times on the upload
    form, they may get duplicate video transcriptions
 1. There is not currently support for a default "still" thumbnail image
@@ -68,7 +70,7 @@ it is done being processed an the video will show up on the "Videos" tab.
     gem install chili_videos
 ```
 
-**Manual steps after installing the gem:**
+### Manual steps after gem installation
 
 1. In your 'config/environment.rb', add:
 
@@ -138,8 +140,10 @@ it is done being processed an the video will show up on the "Videos" tab.
 
 ### Found a bug? Have a feature request?
 
-Please file a ticket on the 'Issues' page of the Github project site
+Please file a ticket on the '[Issues](https://github.com/tomkersten/chili_videos/issues)'
+page of the Github project site
 
+You can also drop me a message on Twitter [@tomkersten](http://twitter.com/tomkersten).
 ### Want to contribute?
 
 (Better instructions coming soon)
@@ -151,7 +155,7 @@ Please file a ticket on the 'Issues' page of the Github project site
 
 ## LICENSE:
 
-    Refer to the LICENSE file
+Refer to the [LICENSE](https://github.com/tomkersten/chili_videos/blob/master/LICENSE) file
 
 ## Contributors (sorted alphabetically)
 
