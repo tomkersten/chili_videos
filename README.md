@@ -73,21 +73,28 @@ gem install chili_videos
 ### Manual steps after gem installation
 
 1. In your 'config/environment.rb', add:
+
 ``` ruby
 config.gem 'chili_videos'
 ```
+
 1. In your 'Rakefile', add:
+
 ``` ruby
 require 'chili_videos'
 require 'tasks/chili_videos_tasks'
 ChiliVideosTasks.new"
 ```
+
 1. Run the installation rake task (runs migrations & installs assets)
+
 ```
 RAILS_ENV=production rake chili_videos:install
 ```
+
 1. Cycle your application server (mongrel, unicorn, etc)
 1. Start the delayed\_job daemon
+
 ```
 RAILS_ENV=production rake chili_videos:delayed_job ACTION=start
 ```
@@ -95,25 +102,34 @@ RAILS_ENV=production rake chili_videos:delayed_job ACTION=start
 ## UNINSTALL:
 
 1. Stop the delayed\_job daemon
+
 ```
 RAILS_ENV=production rake chili_videos:delayed_job ACTION=stop
 ```
+
 1. Run the uninstall rake task (reverts migrations & uninstalls assets)
+
 ```
 RAILS_ENV=production rake chili_videos:uninstall
 ```
+
 1. In your 'Rakefile', remove:
+
 ``` ruby
 require 'chili_videos'
 require 'tasks/chili_videos_tasks'
 ChiliVideosTasks.new"
 ```
+
 1. In your 'config/environment.rb', remove:
+
 ``` ruby
 config.gem 'chili_videos'
 ```
+
 1. Cycle your application server (mongrel, unicorn, whatevs)
 1. Uninstall the gem
+
 ```
 gem uninstall chili_videos
 ```
