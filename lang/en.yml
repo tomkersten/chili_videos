@@ -1,3 +1,5 @@
+
+
 permission_view_video_list: View video list
 permission_view_specific_video: View specific video
 permission_modify_videos: Modify videos
@@ -6,3 +8,8 @@ permission_add_video: Add videos
 transloadit_video_directions: Enter the Transload.it API key and the workflow you would like to use below.
 transloadit_api_key_label: Transload.it API key
 transloadit_workflow_label: Workflow
+default_video_title: (none provided)
+new_video_label: Add video
+delete_video_label: Delete this video
+confirm_video_deletion: Are you sure you want to delete this video?
+video_deleted_message: "Booyah! The requested video has been deleted."

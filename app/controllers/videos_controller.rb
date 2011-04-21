@@ -22,12 +22,16 @@ class VideosController < ApplicationController
   end
 
   def show
-    @video = @project.videos.find_by_cached_slug(params[:id])
-
-    if @video.blank?
+    if video.blank?
       flash[:error] = "The requested video does not exist. Please verify the link or send the project owner a message."
       redirect_to(project_videos_path(@project))
     end
+  end
+
+  def destroy
+    video && video.destroy
+    flash[:notice] = l(:video_deleted_message)
+    redirect_to project_videos_path(@project)
   end
 
   private
@@ -41,5 +45,9 @@ class VideosController < ApplicationController
 
     def verify_plugin_configured
       render(:template => 'videos/plugin_not_configured') unless ChiliVideos.configured?
+    end
+
+    def video
+      @video = @project.videos.find_by_cached_slug(params[:id])
     end
 end

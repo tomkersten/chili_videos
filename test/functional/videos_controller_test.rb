@@ -5,7 +5,7 @@ class VideosControllerTest < ActionController::TestCase
     ChiliVideos::Config.update(:api_key => 'key', :workflow => 'workflow')
     @project = Project.generate!.reload
     @user = User.generate!
-    User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video, :view_specific_video]))
+    User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video, :view_specific_video, :delete_video]))
 
     # "log in" the user
     @request.session[:user_id] = @user.id
@@ -134,6 +134,22 @@ class VideosControllerTest < ActionController::TestCase
       should "assign the project associted with the requested video to @project for the view template" do
         assert_equal @project, assigns(:project)
       end
+    end
+  end
+
+  context "Deleting a video" do
+    setup do
+      @video = Video.create!(:title => "Video 1", :description => "Description...", :url => "http://some-url-here.com/", :project_id => @project.id, :user_id => @user.id)
+    end
+
+    should "actually delete the video from the database" do
+      delete :destroy, :project_id => @project.to_param, :id => @video.to_param
+      assert_nil Video.find_by_id(@video.id)
+    end
+
+    should "redirect to the list of videos for the project" do
+      delete :destroy, :project_id => @project.to_param, :id => @video.to_param
+      assert_redirected_to project_videos_path(@project)
     end
   end
 end

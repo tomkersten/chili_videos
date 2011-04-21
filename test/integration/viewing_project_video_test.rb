@@ -6,7 +6,7 @@ class ViewingProjectVideoTest < ActionController::IntegrationTest
   def setup
     ChiliVideos::Config.update(:api_key => 'api-key', :workflow => 'wf')
 
-    @user = User.generate!(:login => 'existing', :password => 'existing', :password_confirmation => 'existing')
+    @user = User.generate!(:login => 'existing', :password => 'existing', :password_confirmation => 'existing', :admin => true)
     @project = Project.generate!.reload
     User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video, :view_specific_video]))
     login_as
@@ -35,6 +35,23 @@ class ViewingProjectVideoTest < ActionController::IntegrationTest
           assert_have_selector("input.embed.standard[value='#{video_embed_macro_markup(@video)}']")
         end
       end
+
+      should "have a link to delete the video" do
+        within("div.contextual") do
+          assert_have_selector("a[class~='video-del'][href='#{project_video_path(@project, @video)}']")
+        end
+      end
+    end
+  end
+
+  context "Deleting a video by clicking the 'delete video' link" do
+    setup do
+      @video = Video.create!(:title => "Video 1", :description => "Description...", :url => "http://some-url-here.com/", :project_id => @project.id, :user_id => @user.id)
+      delete_via_redirect(project_video_path(@project, @video))
+    end
+
+    should "notify the user that the video was deleted" do
+      assert_have_selector("div.notice")
     end
   end
 end
