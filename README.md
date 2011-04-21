@@ -67,73 +67,55 @@ it is done being processed an the video will show up on the "Videos" tab.
 ## INSTALL:
 
 ```
-    gem install chili_videos
+gem install chili_videos
 ```
 
 ### Manual steps after gem installation
 
 1. In your 'config/environment.rb', add:
-
 ``` ruby
-      config.gem 'chili_videos'
+config.gem 'chili_videos'
 ```
-
-2. In your 'Rakefile', add:
-
+1. In your 'Rakefile', add:
 ``` ruby
-      require 'chili_videos'
-      require 'tasks/chili_videos_tasks'
-      ChiliVideosTasks.new"
+require 'chili_videos'
+require 'tasks/chili_videos_tasks'
+ChiliVideosTasks.new"
 ```
-
-3. Run the installation rake task (runs migrations & installs assets)
-
-``` ruby
-      RAILS_ENV=production rake chili_videos:install
+1. Run the installation rake task (runs migrations & installs assets)
 ```
-
-4. Cycle your application server (mongrel, unicorn, etc)
-
-5. Start the delayed\_job daemon
-
+RAILS_ENV=production rake chili_videos:install
 ```
-      RAILS_ENV=production rake chili_videos:delayed_job ACTION=start
+1. Cycle your application server (mongrel, unicorn, etc)
+1. Start the delayed\_job daemon
+```
+RAILS_ENV=production rake chili_videos:delayed_job ACTION=start
 ```
 
 ## UNINSTALL:
 
 1. Stop the delayed\_job daemon
-
 ```
-      RAILS_ENV=production rake chili_videos:delayed_job ACTION=stop
+RAILS_ENV=production rake chili_videos:delayed_job ACTION=stop
 ```
-
-2. Run the uninstall rake task (reverts migrations & uninstalls assets)
-
+1. Run the uninstall rake task (reverts migrations & uninstalls assets)
 ```
-      RAILS_ENV=production rake chili_videos:uninstall
+RAILS_ENV=production rake chili_videos:uninstall
 ```
-
-3. In your 'Rakefile', remove:
-
+1. In your 'Rakefile', remove:
 ``` ruby
-      require 'chili_videos'
-      require 'tasks/chili_videos_tasks'
-      ChiliVideosTasks.new"
+require 'chili_videos'
+require 'tasks/chili_videos_tasks'
+ChiliVideosTasks.new"
 ```
-
-4. In your 'config/environment.rb', remove:
-
+1. In your 'config/environment.rb', remove:
 ``` ruby
-      config.gem 'chili_videos'
+config.gem 'chili_videos'
 ```
-
-5. Cycle your application server (mongrel, unicorn, whatevs)
-
-6. Uninstall the gem
-
+1. Cycle your application server (mongrel, unicorn, whatevs)
+1. Uninstall the gem
 ```
-    gem uninstall chili_videos
+gem uninstall chili_videos
 ```
 
 ## CONTRIBUTING AND/OR SUPPORT:
