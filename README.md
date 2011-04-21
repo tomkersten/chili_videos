@@ -72,13 +72,13 @@ gem install chili_videos
 
 ### Manual steps after gem installation
 
-1. In your 'config/environment.rb', add:
+In your 'config/environment.rb', add:
 
 ``` ruby
 config.gem 'chili_videos'
 ```
 
-1. In your 'Rakefile', add:
+In your 'Rakefile', add:
 
 ``` ruby
 require 'chili_videos'
@@ -86,14 +86,15 @@ require 'tasks/chili_videos_tasks'
 ChiliVideosTasks.new"
 ```
 
-1. Run the installation rake task (runs migrations & installs assets)
+Run the installation rake task (runs migrations & installs assets)
 
 ```
 RAILS_ENV=production rake chili_videos:install
 ```
 
-1. Cycle your application server (mongrel, unicorn, etc)
-1. Start the delayed\_job daemon
+Cycle your application server (mongrel, unicorn, etc)
+
+Start the delayed\_job daemon
 
 ```
 RAILS_ENV=production rake chili_videos:delayed_job ACTION=start
@@ -101,19 +102,19 @@ RAILS_ENV=production rake chili_videos:delayed_job ACTION=start
 
 ## UNINSTALL:
 
-1. Stop the delayed\_job daemon
+Stop the delayed\_job daemon
 
 ```
 RAILS_ENV=production rake chili_videos:delayed_job ACTION=stop
 ```
 
-1. Run the uninstall rake task (reverts migrations & uninstalls assets)
+Run the uninstall rake task (reverts migrations & uninstalls assets)
 
 ```
 RAILS_ENV=production rake chili_videos:uninstall
 ```
 
-1. In your 'Rakefile', remove:
+In your 'Rakefile', remove:
 
 ``` ruby
 require 'chili_videos'
@@ -121,18 +122,21 @@ require 'tasks/chili_videos_tasks'
 ChiliVideosTasks.new"
 ```
 
-1. In your 'config/environment.rb', remove:
+In your 'config/environment.rb', remove:
 
 ``` ruby
 config.gem 'chili_videos'
 ```
 
-1. Cycle your application server (mongrel, unicorn, whatevs)
-1. Uninstall the gem
+Cycle your application server (mongrel, unicorn, whatevs)...
+
+Then, uninstall the chili_videos gem:
 
 ```
 gem uninstall chili_videos
 ```
+
+Done.
 
 ## CONTRIBUTING AND/OR SUPPORT:
 
