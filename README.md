@@ -149,6 +149,7 @@ You can also drop me a message on Twitter [@tomkersten](http://twitter.com/tomke
 ### Want to contribute?
 
 (Better instructions coming soon)
+
 1. Fork the project
 1. Create a feature branch and implement your idea (preferably with
    tests)
