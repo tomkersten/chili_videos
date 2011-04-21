@@ -35,7 +35,7 @@ Notable items to consider before installing:
    probably don't want to use this on "public" CP/RM installations
    quite yet. This will be implementd soon...
 1. If users click the "submit" button multiple times on the upload
-   form, they may get duplicate video transcriptions
+   form, they may get duplicate video transcodings.
 1. There is not currently support for a default "still" thumbnail image
    to be displayed when the video has not been started yet. All videos
    are just a "black box" until you click "play" at this point.
