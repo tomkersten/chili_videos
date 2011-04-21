@@ -41,7 +41,7 @@ Noteable items to consider before installing:
 ## SYNOPSIS:
 
 1. Install the plugin
-1. Fire up the `delayed_job` daemon
+1. Fire up the delayed\_job daemon
 1. Add your Transload.it account credentials & template ID on the
    'ChiliVideos' plugin settings page.
 1. Enable the "Videos" module in a project
@@ -49,70 +49,90 @@ Noteable items to consider before installing:
 A "Videos" tab will show up in your project. Click the "Add Video" link
 in the contextual menu and use the form to send a video through the
 Transload.it workflow you specified in your plugin settings. The
-`delayed_job` daemon will grab the information about your video when
+delayed\_job daemon will grab the information about your video when
 it is done being processed an the video will show up on the "Videos" tab.
 
 ## REQUIREMENTS:
 
-1. A Transload.it API key and workflow template ID
-1. Gems:
-   1. `httparty` (v0.7.4)
-   1. `daemon-spawn` (v0.4.2)
-   1. `delayed_job` (v2.0.4)
-   1. `friendly_id` (v3.2.1.1)
-   1. `hashie` (v1.0.0)
+* A Transload.it API key and workflow template ID
+* Gems:
+  - httparty (v0.7.4)
+  - daemon-spawn (v0.4.2)
+  - delayed\_job (v2.0.4)
+  - friendly\_id (v3.2.1.1)
+  - hashie (v1.0.0)
 
 ## INSTALL:
 
+```
     gem install chili_videos
+```
 
-*Manual steps after installing the gem:*
+**Manual steps after installing the gem:**
 
 1. In your 'config/environment.rb', add:
 
-    config.gem 'chili_videos'
+``` ruby
+      config.gem 'chili_videos'
+```
 
 2. In your 'Rakefile', add:
 
-    require 'chili_videos'
-    require 'tasks/chili_videos_tasks'
-    ChiliVideosTasks.new"
+``` ruby
+      require 'chili_videos'
+      require 'tasks/chili_videos_tasks'
+      ChiliVideosTasks.new"
+```
 
 3. Run the installation rake task (runs migrations & installs assets)
 
-    RAILS_ENV=production rake chili_videos:install
+``` ruby
+      RAILS_ENV=production rake chili_videos:install
+```
 
 4. Cycle your application server (mongrel, unicorn, etc)
 
-5. Start the `delayed_job` daemon
+5. Start the delayed\_job daemon
 
-    RAILS_ENV=production rake chili_videos:delayed_job ACTION=start
+```
+      RAILS_ENV=production rake chili_videos:delayed_job ACTION=start
+```
 
 ## UNINSTALL:
 
-1. Stop the `delayed_job` daemon
+1. Stop the delayed\_job daemon
 
-    RAILS_ENV=production rake chili_videos:delayed_job ACTION=stop
+```
+      RAILS_ENV=production rake chili_videos:delayed_job ACTION=stop
+```
 
 2. Run the uninstall rake task (reverts migrations & uninstalls assets)
 
-    RAILS_ENV=production rake chili_videos:uninstall
+```
+      RAILS_ENV=production rake chili_videos:uninstall
+```
 
 3. In your 'Rakefile', remove:
 
-    require 'chili_videos'
-    require 'tasks/chili_videos_tasks'
-    ChiliVideosTasks.new"
+``` ruby
+      require 'chili_videos'
+      require 'tasks/chili_videos_tasks'
+      ChiliVideosTasks.new"
+```
 
 4. In your 'config/environment.rb', remove:
 
-    config.gem 'chili_videos'
+``` ruby
+      config.gem 'chili_videos'
+```
 
 5. Cycle your application server (mongrel, unicorn, whatevs)
 
 6. Uninstall the gem
 
+```
     gem uninstall chili_videos
+```
 
 ## CONTRIBUTING AND/OR SUPPORT:
 
