@@ -7,7 +7,8 @@
 ChiliProject/Redmine plugin which integrates with [Transload.it](http://transload.it)
 to offer a private "YouTube-like" setup to your project site.
 
-Notable items to consider before installing:
+
+## NOTABLE ITEMS TO CONSIDER
 
 1. This plugin is distributed as a gem, but does
    ship with migrations and asset files (stylesheets, etc). Therefore,
