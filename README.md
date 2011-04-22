@@ -87,7 +87,7 @@ In your 'Rakefile', add:
 ``` ruby
 require 'chili_videos'
 require 'tasks/chili_videos_tasks'
-ChiliVideosTasks.new"
+ChiliVideosTasks.new
 ```
 
 Run the installation rake task (runs migrations & installs assets)
