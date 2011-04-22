@@ -29,6 +29,10 @@ Notable items to consider before installing:
    wiki's, news items, et cetera. (taken from the `redmine_video_embed`
    plugin)
 
+## SCREENSHOTS:
+
+You can find a few screenshots [here](http://www.flickr.com/photos/62017377@N04/sets/72157626425517743/).
+
 ## PROBLEMS:
 
 1. Does not support authenticated requests to Transload.it yet. You
