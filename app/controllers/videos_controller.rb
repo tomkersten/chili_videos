@@ -34,6 +34,25 @@ class VideosController < ApplicationController
     redirect_to project_videos_path(@project)
   end
 
+  def edit
+    if video.blank?
+      flash[:error] = "The requested video does not exist. Please verify the link or send the project owner a message."
+      redirect_to(project_videos_path(@project))
+    else
+      @versions = @project.versions.open.push(video.version).compact.sort.uniq
+    end
+  end
+
+  def update
+    if video.blank?
+      flash[:error] = "Hmmm....we couldn't find the video you were editing. Someone may have deleted it while you were performing your edits. You may want to send an email to the project owner to find out who has permissions to administer the project videos."
+      redirect_to(project_videos_path(@project))
+    else
+      video.update_attributes(params[:video])
+      redirect_to project_video_path(@project, video)
+    end
+  end
+
   private
     def assembly_params
       { :assembly_id => params[:assembly_id],
@@ -48,6 +67,6 @@ class VideosController < ApplicationController
     end
 
     def video
-      @video = @project.videos.find_by_cached_slug(params[:id])
+      @video ||= @project.videos.find_by_cached_slug(params[:id])
     end
 end

@@ -5,7 +5,7 @@ class VideosControllerTest < ActionController::TestCase
     ChiliVideos::Config.update(:api_key => 'key', :workflow => 'workflow')
     @project = Project.generate!.reload
     @user = User.generate!
-    User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video, :view_specific_video, :delete_video]))
+    User.add_to_project(@user, @project, Role.generate!(:permissions => [:view_video_list, :add_video, :view_specific_video, :delete_video, :modify_videos]))
 
     # "log in" the user
     @request.session[:user_id] = @user.id
@@ -150,6 +150,83 @@ class VideosControllerTest < ActionController::TestCase
     should "redirect to the list of videos for the project" do
       delete :destroy, :project_id => @project.to_param, :id => @video.to_param
       assert_redirected_to project_videos_path(@project)
+    end
+  end
+
+  context "Editing a video" do
+    context "when the requested videos has been associated with the project" do
+      setup do
+        @video = Video.create!(:title => "Video 1", :description => "Description...", :url => "http://some-url-here.com/", :project_id => @project.id, :user_id => @user.id)
+      end
+
+      should "render the 'edit' view template" do
+        get :edit, :project_id => @project.to_param, :id => @video.to_param
+        assert_template("videos/edit")
+      end
+
+      should "loads the specified video for the view template into an @video instance variable" do
+        get :edit, :project_id => @project.to_param, :id => @video.to_param
+        assert_equal @video, assigns(:video)
+      end
+
+      should "load the associated project for the view template into an @project instance variable" do
+        get :edit, :project_id => @project.to_param, :id => @video.to_param
+        assert_equal @project, assigns(:project)
+      end
+
+      should "load the the 'versions' associated with the project for the view template into an @versions instance variable" do
+        version = @project.versions.create!(:name => "Slippery Slope")
+        get :edit, :project_id => @project.to_param, :id => @video.to_param
+        assert_equal [version], assigns(:versions)
+      end
+    end
+
+    context "when the requested videos has not been associated with the project" do
+      setup do
+        Video.destroy_all
+        get :edit, :project_id => @project.to_param, :id => 'nonexistant-video'
+      end
+
+      should "redirect back to the list of project videos" do
+        assert_redirected_to(project_videos_path(:project_id => @project.to_param))
+      end
+
+      should "display an error message to the user" do
+        assert_not_nil flash[:error]
+      end
+    end
+  end
+
+  context "Saving modifications to a video's metadata" do
+    context "when the requested videos has been associated with the project" do
+      setup do
+        @video = Video.create!(:title => "Video 1", :description => "Description...", :url => "http://some-url-here.com/", :project_id => @project.id, :user_id => @user.id)
+      end
+
+      should "save the new metadata to the video" do
+        new_title = "new title"
+        put :update, :project_id => @project.to_param, :id => @video.to_param, :video => {:title => new_title}
+        assert_equal new_title, @video.reload.title
+      end
+
+      should "redirect back to the page for that specific video" do
+        put :update, :project_id => @project.to_param, :id => @video.to_param
+        assert_redirected_to project_video_path(@project, @video)
+      end
+    end
+    context "when the requested videos has not been associated with the project" do
+      setup do
+        Video.destroy_all
+        put :update, :project_id => @project.to_param, :id => 'nonexistant-video', :video => {:title => "new title"}
+      end
+
+      should "redirect back to the list of project videos" do
+        assert_redirected_to(project_videos_path(:project_id => @project.to_param))
+      end
+
+      should "display an error message to the user" do
+        assert_not_nil flash[:error]
+      end
     end
   end
 end

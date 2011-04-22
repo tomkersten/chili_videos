@@ -17,4 +17,8 @@ class Video < ActiveRecord::Base
   def permalink
     friendly_id
   end
+
+  def to_s
+    title
+  end
 end

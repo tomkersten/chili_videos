@@ -1,0 +1,32 @@
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag '/plugin_assets/chili_videos/stylesheets/forms' %>
+<% end %>
+
+<h2>Updating "<%= @video %>" video...</h2>
+
+<%- form_for [@project, @video], :html => {:class => "tabular"} do |f|  %>
+  <div class="box">
+    <p>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </p>
+
+    <p>
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </p>
+
+    <%- unless @versions.blank? %>
+      <p>
+        <%- f.label :version_id %>
+        <select name="video[version_id]" id="video_version_id">
+          <%= options_for_select @versions.map {|v| [v.name, v.id]}, @video.version_id %>
+          <option value="">No version</option>
+        </select>
+      </p>
+    <%- end %>
+  </div>
+  <%= f.submit "Save updates" %>
+  or
+  <%= link_to "Cancel", project_video_path(@project, @video) %>
+<%- end %>

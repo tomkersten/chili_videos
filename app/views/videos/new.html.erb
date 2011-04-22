@@ -24,9 +24,7 @@
       <p>
         <label for="version">Version:</label>
         <select name="version_id" id="version">
-          <%- @versions.each do |version| %>
-            <option value="<%= version.id %>"><%= version.name %></option>
-          <%- end %>
+          <%= options_for_select @versions.map {|v| [v.name, v.id]} %>
           <option value="">No version</option>
         </select>
       </p>

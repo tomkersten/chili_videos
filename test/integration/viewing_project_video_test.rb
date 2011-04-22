@@ -47,6 +47,12 @@ class ViewingProjectVideoTest < ActionController::IntegrationTest
           assert_have_selector("a[class~='video-edit'][href='#{edit_project_video_path(@project, @video)}']")
         end
       end
+
+      should "have a link to upload a new video" do
+        within("div.contextual") do
+          assert_have_selector("a", :href => new_project_video_path(@project))
+        end
+      end
     end
   end
 
