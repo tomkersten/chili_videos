@@ -13,6 +13,7 @@ app/models/assembly_observer.rb
 app/models/assembly_processor.rb
 app/models/video.rb
 app/views/settings/_settings.html.erb
+app/views/videos/edit.html.erb
 app/views/videos/index.html.erb
 app/views/videos/new.html.erb
 app/views/videos/plugin_not_configured.html.erb
