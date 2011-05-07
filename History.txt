@@ -1,3 +1,7 @@
+== NEXT
+
+* Removed 'Add one...' link on vidoes/index when you don't
+  have permissions to add a video (when no videos present)
 == 0.1.0 2011-04-21
 
 * 1 major enhancement:

@@ -11,7 +11,7 @@
 <%- if @videos.empty? %>
   <p class="nodata">
     No videos uploaded yet!
-    <%= link_to "Add one...", new_project_video_path(@project) %>
+    <%= link_to "Add one...", new_project_video_path(@project) if User.current.allowed_to?(:add_video, nil, :global => true) %>
   <p>
 <%- else %>
   <ul class="videos">
