@@ -5,7 +5,7 @@ require 'chili_videos'
 require 'dispatcher'
 require 'videos_helper'
 
-Dispatcher.to_prepare :question_plugin do
+Dispatcher.to_prepare :chili_vidoes do
   require_dependency 'project'
   Project.send(:include, VideoProjectPatch) unless Project.included_modules.include? VideoProjectPatch
 
