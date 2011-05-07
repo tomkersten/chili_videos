@@ -26,11 +26,11 @@ Redmine::Plugin.register :chili_videos do
   author_url 'http://tomkersten.com/'
 
   project_module :videos do
-    permission :view_video_list, :videos => :index
-    permission :view_specific_video, :videos => :show
-    permission :modify_videos, :videos => [:edit,:update]
-    permission :delete_video, :videos => :destroy
-    permission :add_video, :videos => [:new, :create, :upload_complete]
+    permission :view_video_list, {:videos => [:index]}
+    permission :view_specific_video, {:videos => [:show]}
+    permission :modify_videos, {:videos => [:edit,:update]}, {:require => :member}
+    permission :delete_video, {:videos => [:destroy]}, {:require => :member}
+    permission :add_video, {:videos => [:new, :create, :upload_complete]}, {:require => :member}
   end
 
   settings :default => {:transloadit_api_key => '', :transloadit_workflow => ''}, :partial => 'settings/settings'
