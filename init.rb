@@ -22,7 +22,7 @@ Redmine::Plugin.register :chili_videos do
   author 'Tom Kersten'
   description 'Adds support for using the Transload.it service to transcode videos and associate them with projects.'
   version ChiliVideos::VERSION
-  url 'http://example.com/path/to/plugin'
+  url 'https://github.com/tomkersten/chili_videos'
   author_url 'http://tomkersten.com/'
 
   project_module :videos do
