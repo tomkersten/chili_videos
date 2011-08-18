@@ -1,3 +1,7 @@
+== 0.2.1 2011-08-18
+
+* Fixed missing link to edit a video's meta-data
+
 == 0.2.0 2011-08-18
 
 Minor enhancements:
