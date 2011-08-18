@@ -6,6 +6,9 @@ gem 'hashie', '~> 1.0.0'
 gem 'friendly_id', '~> 3.2.1'
 
 group :development do
+  gem 'cucumber'
+  gem 'rspec-rails'
+  gem 'redmine_plugin_support'
   gem 'autotest-rails', '~> 4.1.0'
   gem 'fakeweb'
   gem 'hoe', '~> 2.8.0'
