@@ -25,7 +25,7 @@ class ChiliVideosTasks < Rake::TaskLib
       end
 
       desc "Manage delayed_job...requires argument [ACTION=(#{VALID_DJ_ACTIONS.join('|')})]"
-      task :delayed_job, :action, :needs => [:environment] do |task, args|
+      task :delayed_job, 'action' => [:environment] do |task, args|
         unless(args[:action] && VALID_DJ_ACTIONS.include?(args[:action]))
           puts "'ACTION' is a required parameter. Valid values are: #{VALID_DJ_ACTIONS.join(', ')}"
           exit(1)
