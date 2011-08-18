@@ -42,7 +42,7 @@ module VideosHelper
         "  <a href='#{prjct_video_path(video.project, video)}' class='video-cell small' style='float: left; margin-right: 20px; background-color:#000; text-align: right; display: block; width:128px; height:96px;'>\n" + \
         "    <span style='position:relative; top: 81px; padding-right: 3px; color: #CCC; display: block;'>#{video.length}</span>\n" + \
         "  </a>\n" + \
-        "<h3 style='border-bottom: none; font-size: 12px; width: 128px; padding: 5px 0 0 0; margin: 0;'>#{link_to(truncate(video.title, :length => 24), prjct_video_path(video.project, video), :title => video.title)}</h3>\n" + \
+        "<h3 style='border-bottom: none; font-size: 12px; width: 128px; padding: 5px 0 0 0; margin: 0;'>#{link_to(truncate(video.title, :length => 21), prjct_video_path(video.project, video), :title => video.title)}</h3>\n" + \
         "<dl style='margin-top: 0;'>\n" + \
         "  <dt style='float: left; padding-right: 3px;'>by:</dt>\n" \
         "  <dd style='margin: 3px; clear: after; display: block;'>#{link_to(truncate(video.user.name, :length => 17), usr_path(video.user))}</dd>\n" + \
