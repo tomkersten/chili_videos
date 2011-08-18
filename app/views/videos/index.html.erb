@@ -14,24 +14,5 @@
     <%= link_to "Add one...", new_project_video_path(@project) if User.current.allowed_to?(:add_video, nil, :global => true) %>
   <p>
 <%- else %>
-  <ul class="videos">
-    <%- @videos.each do |video| %>
-      <li class="video" id="<%= video.to_param %>">
-        <a href="<%= project_video_path(@project, video) %>" class="video-cell small">
-          <span>
-              <%= video.length %>
-          </span>
-        </a>
-      <h3>
-        <%= link_to(truncate(video.title, :length => 24), project_video_path(@project, video), :title => video.title) %>
-      </h3>
-      <dl>
-        <dt>by:</dt>
-        <dd>
-          <%= link_to(truncate(video.user.name, :length => 17), user_path(video.user)) %>
-        </dd>
-      </dl>
-      </li>
-    <%- end %>
-  </ul>
+  <%= video_thumbnail_list(@videos) %>
 <%- end %>
