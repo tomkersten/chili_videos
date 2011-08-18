@@ -5,6 +5,11 @@
 * Updated default pemissions in plugin settings
   * Set so non-members are not able to even be permitted to modify,
     delete, or add videos to a project
+* Added a 'video_link' wiki macro which can be used to generate a
+  hyperlink to a specific video.
+* Added a 'version_video_thumbnails' wiki macro which accepts a version
+  name and will generate a list of videos associated with the version.
+* Cleaned up a few CSS bugs
 
 == 0.1.0 2011-04-21
 
