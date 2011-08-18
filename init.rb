@@ -61,3 +61,14 @@ Redmine::WikiFormatting::Macros.register do
 END
   end
 end
+
+Redmine::WikiFormatting::Macros.register do
+  desc "Provides a link to a video with the title of the video as the link text.\n" +
+       "Usage examples:\n\n" +
+       "  !{{video_link(id)}}\n"
+  macro :video_link do |o, args|
+    video_id = args[0]
+    video = Video.find(video_id)
+    VideosHelper.link_to_video(video)
+  end
+end

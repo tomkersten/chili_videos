@@ -23,6 +23,15 @@ module VideosHelper
     "</script>\n"
   end
 
+  def link_to_video_macro_markup(video)
+    "{{video_link(#{video.permalink})}}"
+  end
+
+  def link_to_video(video)
+    return "[Video not provided]" unless video.instance_of?(Video)
+    "<a href='/projects/#{video.project.to_param}/videos/#{video.to_param}' class='video-link'>#{video.title}</a>"
+  end
+
   private
     def swf_object_file_url
       "/plugin_assets/chili_videos/swfobject.js"

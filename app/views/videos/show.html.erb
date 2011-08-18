@@ -32,8 +32,10 @@
       <dd><%= link_to @video.version, project_version_path(@project, @video.version) %></dd>
     <%- end %>
 
-    <dt><label for="<%= @video.title %>">Embed:</label></dt>
+    <dt><label for="<%= @video.title %>">Embed video:</label></dt>
     <dd><input type="text" id="<%= @video.title %>" class="embed standard" value="<%= video_embed_macro_markup(@video) %>" /></dd>
+    <dt><label for="<%= @video.title %>_link">Video Link:</label></dt>
+    <dd><input type="text" id="<%= @video.title %>_link" class="embed standard" value="<%= link_to_video_macro_markup(@video) %>" /></dd>
   </dl>
 </div>
 
