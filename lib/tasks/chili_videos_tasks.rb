@@ -110,3 +110,5 @@ class ChiliVideosTasks < Rake::TaskLib
       ].join("\n")
     end
 end
+
+ChiliVideosTasks.new

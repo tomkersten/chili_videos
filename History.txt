@@ -1,5 +1,7 @@
 == NEXT
 
+Minor enhancements:
+
 * Removed 'Add one...' link on vidoes/index when you don't
   have permissions to add a video (when no videos present)
 * Updated default pemissions in plugin settings
@@ -9,6 +11,10 @@
   hyperlink to a specific video.
 * Added a 'version_video_thumbnails' wiki macro which accepts a version
   name and will generate a list of videos associated with the version.
+
+Bugfixes:
+
+* Fixed bug which caused the "Edit" link for videos to be hidden
 * Cleaned up a few CSS bugs
 
 == 0.1.0 2011-04-21
