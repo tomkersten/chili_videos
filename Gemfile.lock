@@ -37,6 +37,8 @@ GEM
     hashie (1.0.0)
     hoe (2.8.0)
       rake (>= 0.8.7)
+    hoe-git (1.3.0)
+      hoe (>= 2.2.0)
     httparty (0.7.8)
       crack (= 0.1.8)
     json (1.6.1)
@@ -79,6 +81,7 @@ DEPENDENCIES
   friendly_id (~> 3.2.1)
   hashie (~> 1.0.0)
   hoe (~> 2.8.0)
+  hoe-git
   httparty (~> 0.7.4)
   rails (= 2.3.14)
   redmine_plugin_support
