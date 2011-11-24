@@ -11,6 +11,7 @@ app/helpers/videos_helper.rb
 app/models/assembly.rb
 app/models/assembly_observer.rb
 app/models/assembly_processor.rb
+app/models/encoding.rb
 app/models/video.rb
 app/views/settings/_settings.html.erb
 app/views/videos/edit.html.erb
