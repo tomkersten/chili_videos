@@ -10,7 +10,7 @@ require 'chili_videos/config'
 module ChiliVideos
   extend self
 
-  VERSION = '0.2.1' unless defined?(ChiliVideos::VERSION)
+  VERSION = '0.2.2' unless defined?(ChiliVideos::VERSION)
 
   def configured?
     !Config.api_key.blank? && !Config.workflow.blank?
