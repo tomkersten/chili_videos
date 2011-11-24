@@ -102,7 +102,7 @@ Cycle your application server (mongrel, unicorn, etc)
 Start the delayed\_job daemon
 
 ```
-RAILS_ENV=production rake chili_videos:delayed_job ACTION=start
+RAILS_ENV=production rake "chili_videos:delayed_job[start]"
 ```
 
 ## UNINSTALL:
@@ -110,7 +110,7 @@ RAILS_ENV=production rake chili_videos:delayed_job ACTION=start
 Stop the delayed\_job daemon
 
 ```
-RAILS_ENV=production rake chili_videos:delayed_job ACTION=stop
+RAILS_ENV=production rake "chili_videos:delayed_job[stop]"
 ```
 
 Run the uninstall rake task (reverts migrations & uninstalls assets)

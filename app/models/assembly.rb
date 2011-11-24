@@ -1,6 +1,3 @@
-class Encoding < Hashie::Mash
-end
-
 class Assembly < ActiveRecord::Base
   unloadable
 

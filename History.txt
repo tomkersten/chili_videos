@@ -1,3 +1,8 @@
+== 0.2.2 2011-11-23
+
+* Fixed issues in supplied rake tasks for installing gem and
+  managing delayed_job daemon. [#11, #12]
+
 == 0.2.1 2011-08-18
 
 * Fixed missing link to edit a video's meta-data
